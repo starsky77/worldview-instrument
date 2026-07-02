@@ -125,6 +125,14 @@
   .vd-verdict.solid{color:#0f2018;background:rgba(95,160,124,.9);}
   .vd-verdict.doubt{color:#2a1608;background:rgba(198,137,62,.9);}
   .vd-essence{font-size:13.5px;line-height:1.7;color:var(--on-ink-dim);font-weight:300;margin:0 0 18px;}
+  .readout-toggle{border-top:1px solid rgba(233,231,223,.1);margin-top:2px;}
+  .readout-toggle > summary{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--on-ink-dim);cursor:pointer;list-style:none;user-select:none;display:inline-flex;align-items:center;gap:7px;padding:12px 0 2px;}
+  .readout-toggle > summary::-webkit-details-marker{display:none;}
+  .readout-toggle > summary::before{content:"＋";color:var(--brass-bright);font-size:12px;}
+  .readout-toggle[open] > summary::before{content:"－";}
+  .readout-toggle > summary:hover{color:var(--on-ink);}
+  .readout-toggle > summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px;}
+  .readout-toggle .readout{border-top:none;padding:8px 0 4px;}
   .vd-checks{border-top:1px solid rgba(233,231,223,.1);padding-top:14px;}
   .chk-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;}
   .chk-k{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;color:var(--on-ink-dim);}
@@ -190,27 +198,19 @@
             </svg>
           </div>
           <div class="plane-legend">
-            <span class="lg"><span class="lg-dot main"></span>描述位置 · 定类型</span>
+            <span class="lg"><span class="lg-dot main"></span>描述位置</span>
             <span class="lg"><span class="lg-dot prac"></span>实践位置</span>
           </div>
 
           <div class="strips">
             <div class="strip">
-              <div class="strip-cap"><span>结构</span><span class="strip-title">归因：换成自己 vs 换成他人</span><span>个体</span></div>
+              <div class="strip-cap"><span>结构</span><span class="strip-title">归因：对自己 / 对他人</span><span>个体</span></div>
               <div class="strip-track"><span class="tick self" id="t-self"></span><span class="tick-lab self" id="l-self">自</span><span class="tick other" id="t-other"></span><span class="tick-lab other" id="l-other">他</span></div>
             </div>
             <div class="strip">
-              <div class="strip-cap"><span>回避分辨</span><span class="strip-title">认知投入（面对具体分歧）</span><span>深究权衡</span></div>
+              <div class="strip-cap"><span>回避</span><span class="strip-title">面对具体分歧时</span><span>深究</span></div>
               <div class="strip-track"><span class="tick eng" id="t-eng"></span></div>
             </div>
-          </div>
-
-          <div class="readout" id="readout">
-            <div class="line"><span>V 确定性</span><span class="v" id="rd-v">—</span></div>
-            <div class="line"><span>H 描述性归因</span><span class="v" id="rd-h">—</span></div>
-            <div class="line"><span>δ 利己性不对称</span><span class="v" id="rd-d">—</span></div>
-            <div class="line"><span>ε 认知投入</span><span class="v" id="rd-e">—</span></div>
-            <div class="line"><span>σ 离散度</span><span class="v" id="rd-s">—</span></div>
           </div>
 
           <div class="result">
@@ -221,20 +221,30 @@
             <p class="vd-prac" id="vd-prac"></p>
             <p class="vd-essence" id="vd-essence"></p>
             <div class="vd-checks">
-              <div class="chk-row"><span class="chk-k">认知投入 ε</span><span class="chk-tag" id="chk-e-tag"></span></div>
+              <div class="chk-row"><span class="chk-k">对『模糊』的态度</span><span class="chk-tag" id="chk-e-tag"></span></div>
               <p class="chk-note" id="chk-e-note"></p>
-              <div class="chk-row"><span class="chk-k">归因对称 δ</span><span class="chk-tag" id="chk-d-tag"></span></div>
+              <div class="chk-row"><span class="chk-k">对己与对人的归因</span><span class="chk-tag" id="chk-d-tag"></span></div>
               <p class="chk-note" id="chk-d-note"></p>
             </div>
+            <p class="r-fine" id="r-fail" style="display:none"></p>
             <div class="vd-extra">
               <p class="ex-line" id="ex-decouple"></p>
               <div class="ex-sigma">
-                <div class="es-cap"><span id="es-label">作答离散度 σ</span><span class="es-note">仅展示 · 不参与归类</span></div>
+                <div class="es-cap"><span id="es-label">作答波动</span><span class="es-note">仅供参考 · 不影响判定</span></div>
                 <div class="es-track"><span class="es-fill" id="es-fill"></span></div>
                 <p class="es-foot" id="es-foot"></p>
               </div>
             </div>
-            <p class="r-fine" id="r-fail" style="display:none"></p>
+            <details class="readout-toggle">
+              <summary>查看原始读数</summary>
+              <div class="readout" id="readout">
+                <div class="line"><span>V 确定性</span><span class="v" id="rd-v">—</span></div>
+                <div class="line"><span>H 描述性归因</span><span class="v" id="rd-h">—</span></div>
+                <div class="line"><span>δ 利己性不对称</span><span class="v" id="rd-d">—</span></div>
+                <div class="line"><span>ε 认知投入</span><span class="v" id="rd-e">—</span></div>
+                <div class="line"><span>σ 离散度</span><span class="v" id="rd-s">—</span></div>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -248,12 +258,11 @@
   <div class="foot">
     <button class="btn" id="reset">重测</button>
     <details class="method-box" id="method-box">
-      <summary>关于此测量</summary>
+      <summary>关于此结果</summary>
       <div class="method-body">
-        <p>此工具测的东西说话强度各不相同。<b>世界观坐标</b>（认识论 V、描述性归因 H、实践取向）只描述倾向，不追认"型"。描述性归因与实践取向是<b>两根独立的轴</b>——描述上偏结构、实践上偏自我聚焦是融贯的。</p>
-        <p><b>δ（利己性不对称）</b>：在因果结构相同的成对情境里，比较你对"自己失败"与"他人失败且损及你"的归因。结构被锁死，任何不对称只能来自主语替换——这是缺失（利己卸责）留下的、立场难以伪造的指纹。</p>
-        <p><b>ε（认知投入）</b>：容忍模糊可能是考察后的多元立场，也可能只是懒得分辨。为区分二者，抽象态度题的"容忍"极都要求你"已经掂量过／想清楚过"；另有具体分歧情境，检验你面对<b>能够权衡</b>的分歧时是否真的去权衡。抽象上容忍、具体上仍深究＝考察后的多元；抽象上容忍、具体上也回避＝脱离式容忍。二者在抽象表态上同形，只在"是否做分辨的功夫"上分开。</p>
-        <p><b>σ（离散度）</b>：同一主语下作答的摇摆，只显示不解释。<b>失效边界</b>：δ 依赖情境切身、未被识破、信息对称；ε 依赖你没有谎称"掂量过"。任一不成立，相应诊断应削弱、退回"只描述"。非常模验证的心理测验，仅供自我反思。</p>
+        <p>这是一个用于<b>自我反思</b>的工具，不是经过验证的心理测验。它给出的类型与判定都是<b>暂时的、可讨论的</b>，不是对你的定论。</p>
+        <p>结果卡里标着"存疑"的地方，意思只是"这里可能不是一个想清楚的立场，值得你自己再看看"，而非断言。它可能出错——尤其当题目里的情境对你并不切身、或你作答时更多在贴近一个"应该的自己"时。任何一条结论若与你的自我认识不符，<b>以你自己为准</b>。</p>
+        <p>为了让结果不被提前的自我修饰影响，作答过程中不显示任何中间反馈；具体如何计分不在此展开。</p>
       </div>
     </details>
   </div>
@@ -408,14 +417,14 @@ function update(){
   const link=document.getElementById('prac-link');
   link.setAttribute('x1',mx); link.setAttribute('y1',my); link.setAttribute('x2',px); link.setAttribute('y2',py);
 
+  const band=(n,hi,lo)=>n>0.15?hi:(n<-0.15?lo:'居中');
+
   const fx=n=>(n>=0?'+':'')+n.toFixed(2);
   document.getElementById('rd-v').textContent=fx(r.V);
   document.getElementById('rd-h').textContent=fx(r.Hdesc);
   document.getElementById('rd-d').textContent=fx(r.delta)+(r.delta>=0.25?' 利己':(r.delta<=-0.25?' 自苛':' 对称'));
   document.getElementById('rd-e').textContent=fx(r.E)+(r.E>=0.25?' 深究':(r.E<=-0.25?' 回避':' 中性'));
   document.getElementById('rd-s').textContent=r.sigma.toFixed(2)+(r.sigma>=0.4?' 摇摆':' 稳');
-
-  const band=(n,hi,lo)=>n>0.15?hi:(n<-0.15?lo:'居中');
 
   // ============ 最终分类 ============
   // 基础类型：V×H 象限
@@ -463,21 +472,20 @@ function update(){
   vd.textContent = doubt?'部分存疑':'立场扎实';
   vd.className = 'vd-verdict '+(doubt?'doubt':'solid');
 
-  // 失效边界（仅在 ego 时展开）
+  // 失效提醒（仅在 ego 时展开）——只提醒"可能不准"，不透露检测机制
   const fail=document.getElementById('r-fail');
-  if(dCls==='ego'){ fail.style.display=''; fail.innerHTML=`δ 的三条失效边界，任一成立就应削弱"利己卸责"这一判定：① 我判定的"对你不利"未必是你主观感受到的；② 若你已看出情境是成对的，结果不可信；③ 对自己的处境你通常掌握更多内部信息，"对己宽"也可能是信息充分而非防御。`; }
+  if(dCls==='ego'){ fail.style.display=''; fail.innerHTML=`这条判定可能不准：如果那些情境对你并不真的切身，或你作答时更多在贴近一个"应该的自己"，它就不成立。若与你的自我认识不符，以后者为准。`; }
   else{ fail.style.display='none'; }
 
   // 描述 vs 实践的关系：分歧时肯定其融贯（不判为异常），否则说明二者已一并纳入类型
   const dv=r.Hdesc, pv=r.Hprac, diverge=(Math.abs(dv)>=0.15 && Math.abs(pv)>=0.15 && (dv>0)!==(pv>0));
   document.getElementById('ex-decouple').textContent = diverge
-    ? `你"如何看世界"与"把力气用在哪"落在相反方向（平面上描述点与实践点分处两侧）。这是一种融贯的组合，而非矛盾——例如认知上承认结构塑造一切，实践上仍聚焦于自己能改变的部分。它已作为复合类型的一部分被纳入，不计为存疑。`
-    : `实践取向已与描述性归因一并纳入类型（前者＝你把力气用在哪，后者＝你怎么看世界）。二者相互独立，平面上的两个点越近表示越一致。`;
+    ? `你"如何看世界"与"把力气用在哪"落在相反方向（平面上两个点分处两侧）。这是一种融贯的组合，而非矛盾——例如认知上承认结构塑造一切，实践上仍聚焦于自己能改变的部分。它已作为类型的一部分纳入，不计为存疑。`
+    : `实践取向已与你对世界的看法一并纳入类型。二者本可各行其是，平面上两点越近表示越一致。`;
   document.getElementById('es-fill').style.width=Math.round(r.sigma*100)+'%';
-  document.getElementById('es-label').textContent=`作答离散度 σ = ${r.sigma.toFixed(2)}`;
   document.getElementById('es-foot').textContent = r.sigma>=0.4
-    ? '你的作答在同类情境间波动较大。这可能是尚未理清、正在转变，或本就认为情境应区别对待——工具不替你归因，仅如实显示。'
-    : '你的作答在同类情境间较稳定。此项仅供参考，不参与上面的类型判定。';
+    ? '你的作答在相近的问题间波动较大。这可能是尚未想清、正在转变，或你本就认为不同情况该区别对待——不替你判断，仅如实显示。'
+    : '你的作答在相近的问题间比较稳定。仅供参考，不影响上面的结论。';
 }
 
 document.getElementById('reset').addEventListener('click',()=>{ buildItems(); render(); update(); window.scrollTo({top:0,behavior:'smooth'}); });
