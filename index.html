@@ -113,8 +113,14 @@
   .method-body p{margin:0 0 10px;font-size:12px;line-height:1.7;color:var(--text-faint);font-weight:300;}
   .method-body b{font-weight:500;color:var(--text-dim);}
 
-  .vd-type-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+  .vd-type-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
   .vd-type{font-family:"Noto Serif SC",serif;font-weight:600;font-size:24px;color:var(--on-ink);margin:0;line-height:1.2;}
+  .vd-prac{font-family:"Noto Serif SC",serif;font-weight:500;font-size:15px;color:#9FC2C9;margin:0 0 12px;letter-spacing:.01em;}
+  .plane-legend{display:flex;gap:20px;justify-content:center;padding:2px 20px 8px;}
+  .lg{display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--on-ink-dim);}
+  .lg-dot{width:10px;height:10px;display:inline-block;}
+  .lg-dot.main{background:var(--brass-bright);border-radius:50%;}
+  .lg-dot.prac{background:#7FA8B0;transform:rotate(45deg);}
   .vd-verdict{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;padding:3px 9px;border-radius:3px;white-space:nowrap;}
   .vd-verdict.solid{color:#0f2018;background:rgba(95,160,124,.9);}
   .vd-verdict.doubt{color:#2a1608;background:rgba(198,137,62,.9);}
@@ -176,10 +182,16 @@
               <text class="axis-cap" x="180" y="338" text-anchor="middle">容忍模糊</text>
               <text class="axis-cap" x="34" y="183" text-anchor="end">结构</text>
               <text class="axis-cap" x="326" y="183" text-anchor="start">个体</text>
-              <text class="qname" x="180" y="56" text-anchor="middle">认识论 × 描述性归因</text>
+              <text class="qname" x="180" y="56" text-anchor="middle">认识论 × 归因（描述与实践）</text>
               <circle class="fog" id="fog" cx="180" cy="180" r="0"/>
+              <line id="prac-link" x1="180" y1="180" x2="180" y2="180" stroke="rgba(127,168,176,.55)" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <path id="prac-pt" d="M0,-5.5 L5.5,0 L0,5.5 L-5.5,0 Z" transform="translate(180,180)" fill="#7FA8B0" stroke="var(--ink)" stroke-width="1.5"/>
               <circle class="point" id="point" cx="180" cy="180" r="6.5"/>
             </svg>
+          </div>
+          <div class="plane-legend">
+            <span class="lg"><span class="lg-dot main"></span>描述位置 · 定类型</span>
+            <span class="lg"><span class="lg-dot prac"></span>实践位置</span>
           </div>
 
           <div class="strips">
@@ -190,10 +202,6 @@
             <div class="strip">
               <div class="strip-cap"><span>回避分辨</span><span class="strip-title">认知投入（面对具体分歧）</span><span>深究权衡</span></div>
               <div class="strip-track"><span class="tick eng" id="t-eng"></span></div>
-            </div>
-            <div class="strip">
-              <div class="strip-cap"><span>自我聚焦</span><span class="strip-title">实践取向（与上方独立）</span><span>系统聚焦</span></div>
-              <div class="strip-track"><span class="tick solo" id="t-prac"></span></div>
             </div>
           </div>
 
@@ -210,6 +218,7 @@
               <p class="vd-type" id="vd-type"></p>
               <span class="vd-verdict" id="vd-verdict"></span>
             </div>
+            <p class="vd-prac" id="vd-prac"></p>
             <p class="vd-essence" id="vd-essence"></p>
             <div class="vd-checks">
               <div class="chk-row"><span class="chk-k">认知投入 ε</span><span class="chk-tag" id="chk-e-tag"></span></div>
@@ -218,7 +227,7 @@
               <p class="chk-note" id="chk-d-note"></p>
             </div>
             <div class="vd-extra">
-              <p class="ex-line" id="ex-prac"></p>
+              <p class="ex-line" id="ex-decouple"></p>
               <div class="ex-sigma">
                 <div class="es-cap"><span id="es-label">作答离散度 σ</span><span class="es-note">仅展示 · 不参与归类</span></div>
                 <div class="es-track"><span class="es-fill" id="es-fill"></span></div>
@@ -391,7 +400,13 @@ function update(){
   const pct=n=>((n+1)/2*100);
   const put=(id,lab,n)=>{document.getElementById(id).style.left=pct(n)+'%'; if(lab)document.getElementById(lab).style.left=pct(n)+'%';};
   put('t-self','l-self',r.selfMean); put('t-other','l-other',r.otherMean);
-  put('t-eng',null,r.E); put('t-prac',null,r.Hprac);
+  put('t-eng',null,r.E);
+
+  // 实践位置：平面上的第二个标记（菱形）+ 虚线连到描述位置
+  const px=toX(r.Hprac), py=toY(r.V), mx=toX(r.Hdesc), my=toY(r.V);
+  document.getElementById('prac-pt').setAttribute('transform',`translate(${px},${py})`);
+  const link=document.getElementById('prac-link');
+  link.setAttribute('x1',mx); link.setAttribute('y1',my); link.setAttribute('x2',px); link.setAttribute('y2',py);
 
   const fx=n=>(n>=0?'+':'')+n.toFixed(2);
   document.getElementById('rd-v').textContent=fx(r.V);
@@ -413,6 +428,10 @@ function update(){
   const borderline = (Math.abs(r.V)<0.15?'认识论':'') + (Math.abs(r.Hdesc)<0.15?(Math.abs(r.V)<0.15?'与归因':'归因'):'');
   document.getElementById('vd-type').textContent = type;
   document.getElementById('vd-essence').textContent = essence + (borderline?`（你在${borderline}轴上贴近中线，介于相邻类型之间，此归属较松。）`:'');
+
+  // 实践取向作为类型的第二个组成部分（不预设与描述一致）
+  const pracLabel = r.Hprac>0.15?'偏系统聚焦':(r.Hprac<-0.15?'偏自我聚焦':'居中');
+  document.getElementById('vd-prac').textContent = `实践取向 · ${pracLabel}`;
 
   // ε 校验（配 V 轴）
   const tolerant=r.V<=-0.15, certainty=r.V>=0.15;
@@ -449,8 +468,11 @@ function update(){
   if(dCls==='ego'){ fail.style.display=''; fail.innerHTML=`δ 的三条失效边界，任一成立就应削弱"利己卸责"这一判定：① 我判定的"对你不利"未必是你主观感受到的；② 若你已看出情境是成对的，结果不可信；③ 对自己的处境你通常掌握更多内部信息，"对己宽"也可能是信息充分而非防御。`; }
   else{ fail.style.display='none'; }
 
-  // 附加维度：实践取向（独立）+ σ（只展示不归因）
-  document.getElementById('ex-prac').textContent=`实践取向：${band(r.Hprac,'偏系统聚焦','偏自我聚焦')}　—　与上面的类型相互独立（你怎么看世界 vs 你把力气用在哪）。`;
+  // 描述 vs 实践的关系：分歧时肯定其融贯（不判为异常），否则说明二者已一并纳入类型
+  const dv=r.Hdesc, pv=r.Hprac, diverge=(Math.abs(dv)>=0.15 && Math.abs(pv)>=0.15 && (dv>0)!==(pv>0));
+  document.getElementById('ex-decouple').textContent = diverge
+    ? `你"如何看世界"与"把力气用在哪"落在相反方向（平面上描述点与实践点分处两侧）。这是一种融贯的组合，而非矛盾——例如认知上承认结构塑造一切，实践上仍聚焦于自己能改变的部分。它已作为复合类型的一部分被纳入，不计为存疑。`
+    : `实践取向已与描述性归因一并纳入类型（前者＝你把力气用在哪，后者＝你怎么看世界）。二者相互独立，平面上的两个点越近表示越一致。`;
   document.getElementById('es-fill').style.width=Math.round(r.sigma*100)+'%';
   document.getElementById('es-label').textContent=`作答离散度 σ = ${r.sigma.toFixed(2)}`;
   document.getElementById('es-foot').textContent = r.sigma>=0.4
