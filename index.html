@@ -17,136 +17,124 @@
     --rule:#C3C4C9;
     --q-tr:rgba(190,140,60,0.09); --q-tl:rgba(96,128,180,0.09);
     --q-bl:rgba(88,156,124,0.09); --q-br:rgba(158,104,158,0.10);
-    --good:#5FA07C; --warn:#C6893E;
+    --good:#5FA07C; --warn:#C6893E; --alert:#C56A57; --cool:#6E8BB5;
   }
   *{box-sizing:border-box;}
   html{-webkit-text-size-adjust:100%;}
-  body{
-    margin:0;background:var(--paper);color:var(--text);
-    font-family:"Noto Sans SC",system-ui,sans-serif;font-weight:400;line-height:1.7;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{margin:0;background:var(--paper);color:var(--text);
+    font-family:"Noto Sans SC",system-ui,sans-serif;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:1180px;margin:0 auto;padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px) 96px;}
 
-  header{border-bottom:1px solid var(--rule);padding-bottom:26px;margin-bottom:36px;}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.34em;
-    text-transform:uppercase;color:var(--text-faint);margin:0 0 14px;}
-  h1{font-family:"Noto Serif SC",serif;font-weight:600;font-size:clamp(28px,5vw,44px);
-    line-height:1.12;margin:0;letter-spacing:.01em;}
+  header{border-bottom:1px solid var(--rule);padding-bottom:26px;margin-bottom:34px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--text-faint);margin:0 0 14px;}
+  h1{font-family:"Noto Serif SC",serif;font-weight:600;font-size:clamp(28px,5vw,44px);line-height:1.12;margin:0;letter-spacing:.01em;}
   .sub{margin:16px 0 0;max-width:64ch;color:var(--text-dim);font-weight:300;font-size:15px;}
-  .sub b{font-weight:500;color:var(--text);}
 
   .grid{display:grid;grid-template-columns:1fr;gap:44px;}
   @media(min-width:960px){.grid{grid-template-columns:minmax(0,1fr) 400px;gap:56px;align-items:start;}}
 
-  /* ---------- forced-choice item ---------- */
   .item{padding:26px 0 28px;border-top:1px solid var(--rule);}
   .item:first-child{border-top:none;padding-top:4px;}
-  .item-idx{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text-faint);
-    letter-spacing:.1em;margin-bottom:14px;}
+  .item-idx{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text-faint);letter-spacing:.1em;margin-bottom:14px;}
+  .ctx{font-size:14.5px;line-height:1.68;color:var(--text);margin:0 0 15px;padding-left:14px;border-left:2px solid var(--paper-edge);}
   .cards{display:grid;grid-template-columns:1fr;gap:12px;}
   @media(min-width:560px){.cards{grid-template-columns:1fr 1fr;gap:14px;}}
-  .card{
-    position:relative;background:var(--paper-2);border:1px solid var(--paper-edge);
-    border-radius:5px;padding:15px 16px 15px 40px;font-size:14.5px;line-height:1.62;
-    transition:border-color .18s,background .18s;cursor:default;
-  }
-  .card .badge{
-    position:absolute;left:14px;top:14px;font-family:"IBM Plex Mono",monospace;
-    font-size:12px;font-weight:500;color:var(--brass);
-  }
+  .card{position:relative;background:var(--paper-2);border:1px solid var(--paper-edge);border-radius:5px;
+    padding:14px 15px 14px 38px;font-size:14px;line-height:1.6;transition:border-color .18s,background .18s;}
+  .card .badge{position:absolute;left:13px;top:13px;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;color:var(--brass);}
   .card.lean{border-color:#B79046;background:#DEDCD3;}
   .card.strong{border-color:var(--brass);background:#E4DCC6;}
 
   .balance{margin-top:14px;}
   .seg-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
-  .seg{
-    height:42px;border:1px solid var(--paper-edge);background:var(--paper-2);border-radius:3px;
-    cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text-faint);
-    display:flex;align-items:center;justify-content:center;gap:3px;letter-spacing:.02em;
-    transition:background .16s,border-color .16s,color .16s,transform .1s;
-    -webkit-tap-highlight-color:transparent;
-  }
+  .seg{height:42px;border:1px solid var(--paper-edge);background:var(--paper-2);border-radius:3px;cursor:pointer;
+    font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text-faint);display:flex;align-items:center;justify-content:center;gap:3px;
+    transition:background .16s,border-color .16s,color .16s,transform .1s;-webkit-tap-highlight-color:transparent;}
   .seg:hover{border-color:#A9812F;color:var(--text-dim);}
   .seg:active{transform:translateY(1px);}
   .seg[aria-checked="true"]{background:var(--brass);border-color:var(--brass);color:#211a08;font-weight:500;}
   .seg:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
   .seg .arw{font-size:10px;opacity:.7;}
 
-  /* ---------- instrument panel ---------- */
   .panel-sticky{position:static;}
   @media(min-width:960px){.panel-sticky{position:sticky;top:28px;}}
-  .panel{background:var(--ink);border-radius:6px;overflow:hidden;
-    box-shadow:0 1px 0 rgba(255,255,255,.4),0 22px 44px -28px rgba(20,22,32,.7);}
-  .panel-head{display:flex;justify-content:space-between;align-items:center;
-    padding:16px 20px;border-bottom:1px solid rgba(233,231,223,.08);}
-  .panel-head .label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.28em;
-    text-transform:uppercase;color:var(--on-ink-dim);}
+  .panel{background:var(--ink);border-radius:6px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.4),0 22px 44px -28px rgba(20,22,32,.7);}
+  .panel-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(233,231,223,.08);}
+  .panel-head .label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--on-ink-dim);}
   .panel-head .prog{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--brass-bright);}
 
-  .plane-box{padding:14px 14px 4px;}
-  svg{display:block;width:100%;height:auto;}
   .plane-hidden{padding:44px 28px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;}
   .ph-ring{position:relative;width:120px;height:120px;margin-bottom:22px;}
   .ph-ring svg{width:120px;height:120px;}
-  .ph-count{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:"IBM Plex Mono",monospace;font-size:30px;color:var(--on-ink);font-weight:500;}
-  .ph-text{font-size:12.5px;line-height:1.7;color:var(--on-ink-faint);font-weight:300;max-width:32ch;margin:0;}
-  .qname{fill:var(--on-ink-faint);font-family:"Noto Serif SC",serif;font-weight:500;
-    font-size:12.5px;transition:fill .5s ease;}
-  .qname.on{fill:var(--on-ink);}
-  .axis-cap{fill:var(--on-ink-dim);font-family:"IBM Plex Mono",monospace;font-size:9px;
-    letter-spacing:.12em;text-transform:uppercase;}
-  .point-halo{fill:rgba(219,169,80,.16);opacity:0;transition:opacity .6s ease;}
-  .point-halo.on{opacity:1;}
-  .point{fill:var(--brass-bright);stroke:var(--ink);stroke-width:1.5;
-    transition:cx .55s cubic-bezier(.22,.61,.36,1),cy .55s cubic-bezier(.22,.61,.36,1),r .3s ease;}
-  .point.unsettled{opacity:.5;}
+  .ph-count{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:30px;color:var(--on-ink);font-weight:500;}
+  .ph-text{font-size:12.5px;line-height:1.7;color:var(--on-ink-faint);font-weight:300;max-width:34ch;margin:0;}
 
-  .readout{padding:16px 20px;border-top:1px solid rgba(233,231,223,.08);
-    font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--on-ink-dim);}
-  .readout .line{display:flex;justify-content:space-between;padding:3px 0;}
-  .readout .line .v{color:var(--on-ink);}
-  .readout .coord{color:var(--brass-bright);}
-  .coh{margin-top:10px;padding-top:11px;border-top:1px dashed rgba(233,231,223,.12);}
-  .coh .cline{display:flex;align-items:center;gap:9px;padding:3px 0;font-size:11.5px;}
-  .coh .clabel{color:var(--on-ink-dim);white-space:nowrap;}
-  .coh .track{flex:1;height:5px;background:rgba(233,231,223,.1);border-radius:3px;overflow:hidden;}
-  .coh .fill{height:100%;width:0;background:var(--good);transition:width .5s ease,background .3s;}
-  .coh .pct{color:var(--on-ink);min-width:34px;text-align:right;}
+  .plane-box{padding:14px 14px 2px;}
+  svg{display:block;width:100%;height:auto;}
+  .qname{fill:var(--on-ink-faint);font-family:"Noto Serif SC",serif;font-weight:500;font-size:12px;}
+  .axis-cap{fill:var(--on-ink-dim);font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;}
+  .fog{fill:rgba(219,169,80,.13);}
+  .point{fill:var(--brass-bright);stroke:var(--ink);stroke-width:1.5;}
 
-  .result{padding:20px;border-top:1px solid rgba(233,231,223,.08);min-height:20px;}
-  .result .placeholder{font-size:13px;color:var(--on-ink-faint);font-weight:300;line-height:1.6;}
-  .r-card{opacity:0;transform:translateY(6px);transition:opacity .6s ease,transform .6s ease;}
-  .r-card.on{opacity:1;transform:none;}
-  .r-name{font-family:"Noto Serif SC",serif;font-weight:600;font-size:22px;color:var(--on-ink);margin:0 0 4px;}
-  .r-coord-mini{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--brass-bright);margin-bottom:12px;}
-  .r-desc{font-size:13.5px;line-height:1.72;color:var(--on-ink-dim);font-weight:300;}
-  .r-note{margin-top:14px;padding-top:13px;border-top:1px dashed rgba(233,231,223,.14);
-    font-size:12px;line-height:1.66;color:var(--on-ink-faint);font-weight:300;}
-  .r-note b{color:var(--brass-bright);font-weight:500;}
-  .r-flag{margin-top:12px;font-size:12px;line-height:1.6;color:var(--warn);font-weight:400;display:none;}
+  .strips{padding:6px 20px 4px;}
+  .strip{margin:14px 0 20px;}
+  .strip-cap{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;color:var(--on-ink-dim);margin-bottom:9px;}
+  .strip-title{font-size:11px;color:var(--on-ink);letter-spacing:0;text-transform:none;font-family:"Noto Sans SC";font-weight:400;}
+  .strip-track{position:relative;height:6px;background:rgba(233,231,223,.1);border-radius:4px;}
+  .strip-track::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:rgba(233,231,223,.2);}
+  .tick{position:absolute;top:50%;width:11px;height:11px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--ink);}
+  .tick.self{background:var(--cool);} .tick.other{background:var(--alert);} .tick.solo{background:var(--brass-bright);} .tick.eng{background:var(--good);}
+  .tick-lab{position:absolute;top:12px;font-family:"IBM Plex Mono",monospace;font-size:9px;transform:translateX(-50%);white-space:nowrap;}
+  .tick-lab.self{color:var(--cool);} .tick-lab.other{color:var(--alert);}
 
-  .foot{margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);
-    display:flex;flex-wrap:wrap;gap:18px 24px;align-items:flex-start;justify-content:space-between;}
-  .btn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;
-    background:none;border:1px solid var(--text-dim);color:var(--text-dim);
-    padding:9px 18px;border-radius:3px;cursor:pointer;transition:border-color .15s,color .15s;white-space:nowrap;}
+  .readout{padding:14px 20px 16px;border-top:1px solid rgba(233,231,223,.08);font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--on-ink-dim);}
+  .readout .line{display:flex;justify-content:space-between;padding:2.5px 0;}
+  .readout .v{color:var(--on-ink);}
+
+  .result{padding:18px 20px 20px;border-top:1px solid rgba(233,231,223,.08);min-height:20px;}
+  .placeholder{font-size:13px;color:var(--on-ink-faint);font-weight:300;line-height:1.6;}
+  .r-head{font-family:"Noto Serif SC",serif;font-weight:500;font-size:14.5px;color:var(--on-ink);line-height:1.55;margin:0 0 14px;}
+  .r-block{font-size:13px;line-height:1.72;color:var(--on-ink-dim);font-weight:300;margin:0 0 12px;}
+  .r-block .tag{font-weight:500;}
+  .tag.ego,.tag.incoh{color:var(--alert);} .tag.self,.tag.diseng{color:var(--warn);}
+  .tag.fog{color:var(--warn);} .tag.coh,.tag.engp{color:var(--good);}
+  .r-fine{margin-top:2px;padding-top:12px;border-top:1px dashed rgba(233,231,223,.14);font-size:11.5px;line-height:1.65;color:var(--on-ink-faint);font-weight:300;}
+
+  .foot{margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:18px 24px;align-items:flex-start;justify-content:space-between;}
+  .btn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;background:none;border:1px solid var(--text-dim);color:var(--text-dim);padding:9px 18px;border-radius:3px;cursor:pointer;transition:border-color .15s,color .15s;white-space:nowrap;}
   .btn:hover{border-color:var(--ink);color:var(--ink);}
   .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
   .method-box{display:none;flex:1;min-width:0;max-width:66ch;}
-  .method-box > summary{
-    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;
-    color:var(--text-dim);cursor:pointer;list-style:none;user-select:none;
-    display:inline-flex;align-items:center;gap:8px;
-  }
+  .method-box > summary{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--text-dim);cursor:pointer;list-style:none;user-select:none;display:inline-flex;align-items:center;gap:8px;}
   .method-box > summary::-webkit-details-marker{display:none;}
-  .method-box > summary::before{content:"＋";color:var(--brass);font-size:13px;}
+  .method-box > summary::before{content:"＋";color:var(--brass);}
   .method-box[open] > summary::before{content:"－";}
-  .method-box > summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px;}
   .method-body{margin-top:12px;}
   .method-body p{margin:0 0 10px;font-size:12px;line-height:1.7;color:var(--text-faint);font-weight:300;}
-  .method-body p b{font-weight:500;color:var(--text-dim);}
+  .method-body b{font-weight:500;color:var(--text-dim);}
+
+  .vd-type-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+  .vd-type{font-family:"Noto Serif SC",serif;font-weight:600;font-size:24px;color:var(--on-ink);margin:0;line-height:1.2;}
+  .vd-verdict{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;padding:3px 9px;border-radius:3px;white-space:nowrap;}
+  .vd-verdict.solid{color:#0f2018;background:rgba(95,160,124,.9);}
+  .vd-verdict.doubt{color:#2a1608;background:rgba(198,137,62,.9);}
+  .vd-essence{font-size:13.5px;line-height:1.7;color:var(--on-ink-dim);font-weight:300;margin:0 0 18px;}
+  .vd-checks{border-top:1px solid rgba(233,231,223,.1);padding-top:14px;}
+  .chk-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;}
+  .chk-k{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;color:var(--on-ink-dim);}
+  .chk-tag{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;padding:3px 9px;border-radius:3px;white-space:nowrap;}
+  .chk-tag.engp,.chk-tag.coh{color:#0f2018;background:rgba(95,160,124,.85);}
+  .chk-tag.diseng,.chk-tag.self,.chk-tag.neu{color:#2a1608;background:rgba(198,137,62,.8);}
+  .chk-tag.incoh,.chk-tag.ego{color:#2a0f0a;background:rgba(197,106,87,.9);}
+  .chk-tag.neu{background:rgba(142,145,160,.55);color:#12141c;}
+  .chk-note{font-size:12px;line-height:1.6;color:var(--on-ink-faint);font-weight:300;margin:5px 0 0;}
+  .vd-extra{border-top:1px solid rgba(233,231,223,.1);margin-top:16px;padding-top:14px;}
+  .ex-line{font-size:12.5px;line-height:1.6;color:var(--on-ink-dim);font-weight:300;margin:0 0 14px;}
+  .es-cap{display:flex;justify-content:space-between;align-items:baseline;font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--on-ink-dim);margin-bottom:7px;}
+  .es-note{color:var(--on-ink-faint);font-size:9.5px;letter-spacing:.04em;}
+  .es-track{position:relative;height:5px;background:rgba(233,231,223,.1);border-radius:3px;overflow:hidden;}
+  .es-fill{position:absolute;left:0;top:0;height:100%;background:var(--on-ink-dim);border-radius:3px;transition:width .5s ease;}
+  .es-foot{font-size:11px;line-height:1.55;color:var(--on-ink-faint);font-weight:300;margin:7px 0 0;}
 
   @media(prefers-reduced-motion:reduce){*{transition:none !important;}}
 </style>
@@ -156,7 +144,7 @@
   <header>
     <p class="eyebrow">Worldview</p>
     <h1>世界观定位仪</h1>
-    <p class="sub">每题两句话，选更贴近你的一边，并标出程度。没有"中立"档，凭第一反应即可。</p>
+    <p class="sub">下面有一些陈述与情境。有的给你两句话，选更贴近你的一边并标出程度；有的给你一个情境，选你更倾向的做法。没有"中立"档，凭第一反应即可。全部完成后显示结果。</p>
   </header>
 
   <div class="grid">
@@ -166,60 +154,84 @@
       <div class="panel">
         <div class="panel-head">
           <span class="label" id="head-label">作答进度</span>
-          <span class="prog" id="prog">0 / 10</span>
+          <span class="prog" id="prog">0 / 0</span>
         </div>
+
         <div class="plane-hidden" id="plane-hidden">
           <div class="ph-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(233,231,223,.1)" stroke-width="4"/><circle id="ph-arc" cx="60" cy="60" r="52" fill="none" stroke="var(--brass)" stroke-width="4" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .5s ease"/></svg><span class="ph-count" id="ph-count">0</span></div>
-          <p class="ph-text">完成全部十题后，此处一次性显示你的结果。<br>作答期间不提供任何中间反馈——这是为了不让你根据它调整后面的选择。</p>
+          <p class="ph-text">全部答完后，此处一次性显示你的结果。作答期间不提供任何中间反馈——这是为了不让你据此调整后面的选择。</p>
         </div>
+
         <div class="plane-wrap" id="plane-wrap" style="display:none">
-        <div class="plane-box">
-          <svg viewBox="0 0 360 360" role="img" aria-label="世界观坐标平面">
-            <rect x="180" y="40" width="140" height="140" fill="var(--q-tr)"/>
-            <rect x="40" y="40" width="140" height="140" fill="var(--q-tl)"/>
-            <rect x="40" y="180" width="140" height="140" fill="var(--q-bl)"/>
-            <rect x="180" y="180" width="140" height="140" fill="var(--q-br)"/>
-            <rect x="40" y="40" width="280" height="280" fill="none" stroke="rgba(233,231,223,.14)" stroke-width="1"/>
-            <g stroke="rgba(233,231,223,.06)" stroke-width="1">
-              <line x1="110" y1="40" x2="110" y2="320"/><line x1="250" y1="40" x2="250" y2="320"/>
-              <line x1="40" y1="110" x2="320" y2="110"/><line x1="40" y1="250" x2="320" y2="250"/>
-            </g>
-            <line x1="180" y1="40" x2="180" y2="320" stroke="rgba(233,231,223,.22)" stroke-width="1"/>
-            <line x1="40" y1="180" x2="320" y2="180" stroke="rgba(233,231,223,.22)" stroke-width="1"/>
-            <g id="labels" style="opacity:0;transition:opacity .6s ease">
+          <div class="plane-box">
+            <svg viewBox="0 0 360 360" role="img" aria-label="世界观坐标平面">
+              <rect x="180" y="40" width="140" height="140" fill="var(--q-tr)"/>
+              <rect x="40" y="40" width="140" height="140" fill="var(--q-tl)"/>
+              <rect x="40" y="180" width="140" height="140" fill="var(--q-bl)"/>
+              <rect x="180" y="180" width="140" height="140" fill="var(--q-br)"/>
+              <rect x="40" y="40" width="280" height="280" fill="none" stroke="rgba(233,231,223,.14)" stroke-width="1"/>
+              <line x1="180" y1="40" x2="180" y2="320" stroke="rgba(233,231,223,.22)" stroke-width="1"/>
+              <line x1="40" y1="180" x2="320" y2="180" stroke="rgba(233,231,223,.22)" stroke-width="1"/>
               <text class="axis-cap" x="180" y="30" text-anchor="middle">追求确定</text>
               <text class="axis-cap" x="180" y="338" text-anchor="middle">容忍模糊</text>
-              <text class="axis-cap" x="34" y="183" text-anchor="end">关系</text>
+              <text class="axis-cap" x="34" y="183" text-anchor="end">结构</text>
               <text class="axis-cap" x="326" y="183" text-anchor="start">个体</text>
-              <text class="qname" id="q-tl" x="110" y="115" text-anchor="middle">结构决定论</text>
-              <text class="qname" id="q-tr" x="250" y="115" text-anchor="middle">能动个体</text>
-              <text class="qname" id="q-bl" x="110" y="255" text-anchor="middle">关系整体</text>
-              <text class="qname" id="q-br" x="250" y="255" text-anchor="middle">存在建构</text>
-            </g>
-            <circle class="point-halo" id="halo" cx="180" cy="180" r="16"/>
-            <circle class="point unsettled" id="point" cx="180" cy="180" r="5.5"/>
-          </svg>
-        </div>
-        <div class="readout" id="readout" style="display:none">
-          <div class="line"><span>确定性轴 V</span><span class="v" id="rd-v">— / 10</span></div>
-          <div class="line"><span>责任轴 H</span><span class="v" id="rd-h">— / 10</span></div>
-          <div class="line"><span>坐标 (x, y)</span><span class="coord" id="rd-c">( ·  ,  · )</span></div>
-          <div class="coh" id="coh" style="display:none">
-            <div class="cline"><span class="clabel">V 轴一致度</span><span class="track"><span class="fill" id="coh-v"></span></span><span class="pct" id="cohv-p">—</span></div>
-            <div class="cline"><span class="clabel">H 轴一致度</span><span class="track"><span class="fill" id="coh-h"></span></span><span class="pct" id="cohh-p">—</span></div>
+              <text class="qname" x="180" y="56" text-anchor="middle">认识论 × 描述性归因</text>
+              <circle class="fog" id="fog" cx="180" cy="180" r="0"/>
+              <circle class="point" id="point" cx="180" cy="180" r="6.5"/>
+            </svg>
+          </div>
+
+          <div class="strips">
+            <div class="strip">
+              <div class="strip-cap"><span>结构</span><span class="strip-title">归因：换成自己 vs 换成他人</span><span>个体</span></div>
+              <div class="strip-track"><span class="tick self" id="t-self"></span><span class="tick-lab self" id="l-self">自</span><span class="tick other" id="t-other"></span><span class="tick-lab other" id="l-other">他</span></div>
+            </div>
+            <div class="strip">
+              <div class="strip-cap"><span>回避分辨</span><span class="strip-title">认知投入（面对具体分歧）</span><span>深究权衡</span></div>
+              <div class="strip-track"><span class="tick eng" id="t-eng"></span></div>
+            </div>
+            <div class="strip">
+              <div class="strip-cap"><span>自我聚焦</span><span class="strip-title">实践取向（与上方独立）</span><span>系统聚焦</span></div>
+              <div class="strip-track"><span class="tick solo" id="t-prac"></span></div>
+            </div>
+          </div>
+
+          <div class="readout" id="readout">
+            <div class="line"><span>V 确定性</span><span class="v" id="rd-v">—</span></div>
+            <div class="line"><span>H 描述性归因</span><span class="v" id="rd-h">—</span></div>
+            <div class="line"><span>δ 利己性不对称</span><span class="v" id="rd-d">—</span></div>
+            <div class="line"><span>ε 认知投入</span><span class="v" id="rd-e">—</span></div>
+            <div class="line"><span>σ 离散度</span><span class="v" id="rd-s">—</span></div>
+          </div>
+
+          <div class="result">
+            <div class="vd-type-row">
+              <p class="vd-type" id="vd-type"></p>
+              <span class="vd-verdict" id="vd-verdict"></span>
+            </div>
+            <p class="vd-essence" id="vd-essence"></p>
+            <div class="vd-checks">
+              <div class="chk-row"><span class="chk-k">认知投入 ε</span><span class="chk-tag" id="chk-e-tag"></span></div>
+              <p class="chk-note" id="chk-e-note"></p>
+              <div class="chk-row"><span class="chk-k">归因对称 δ</span><span class="chk-tag" id="chk-d-tag"></span></div>
+              <p class="chk-note" id="chk-d-note"></p>
+            </div>
+            <div class="vd-extra">
+              <p class="ex-line" id="ex-prac"></p>
+              <div class="ex-sigma">
+                <div class="es-cap"><span id="es-label">作答离散度 σ</span><span class="es-note">仅展示 · 不参与归类</span></div>
+                <div class="es-track"><span class="es-fill" id="es-fill"></span></div>
+                <p class="es-foot" id="es-foot"></p>
+              </div>
+            </div>
+            <p class="r-fine" id="r-fail" style="display:none"></p>
           </div>
         </div>
-        <div class="result">
-          <div class="placeholder" id="placeholder">答满十题后，此处显示你的象限、解读与作答一致度。</div>
-          <div class="r-card" id="rcard">
-            <p class="r-name" id="r-name"></p>
-            <p class="r-coord-mini" id="r-mini"></p>
-            <p class="r-desc" id="r-desc"></p>
-            <p class="r-note" id="r-note"></p>
-            <p class="r-flag" id="r-flag"></p>
-          </div>
+
+        <div class="result" id="placeholder-wrap">
+          <p class="placeholder">全部答完后，此处显示你的结果。</p>
         </div>
-        </div><!-- /plane-wrap -->
       </div>
     </div>
   </div>
@@ -229,90 +241,87 @@
     <details class="method-box" id="method-box">
       <summary>关于此测量</summary>
       <div class="method-body">
-        <p>每题在两句同样体面的话之间强迫你选边并定程度，用以削弱"什么都想沾"的社会赞许偏差。两条维度（确定性 V、责任 H）由各自独立的题组计分，因此不会陷入强迫选择常见的"此消彼长"假象——那种假象只发生在把独立构念塞进同一常数和时；同一条轴的两极本就互斥，不算失真。</p>
-        <p>每次载入随机打乱题序、随机翻转左右，重测无法靠记忆位置作答。"一致度"是各轴内作答方向的自洽程度（|方向和|/|强度总和|），偏低说明你在该轴反复摇摆、落点稳定性不足；它是自洽信号，<b>不是</b>经过常模验证的信度系数。此工具用于自我反思，非诊断。</p>
-        <p>残余局限：任何自陈式工具都拦不住一个既清楚自己想要的形象、又已看破维度含义的受试者——把维度含义藏到答完之后，是最后一道防线，而非万全。</p>
+        <p>此工具测的东西说话强度各不相同。<b>世界观坐标</b>（认识论 V、描述性归因 H、实践取向）只描述倾向，不追认"型"。描述性归因与实践取向是<b>两根独立的轴</b>——描述上偏结构、实践上偏自我聚焦是融贯的。</p>
+        <p><b>δ（利己性不对称）</b>：在因果结构相同的成对情境里，比较你对"自己失败"与"他人失败且损及你"的归因。结构被锁死，任何不对称只能来自主语替换——这是缺失（利己卸责）留下的、立场难以伪造的指纹。</p>
+        <p><b>ε（认知投入）</b>：容忍模糊可能是考察后的多元立场，也可能只是懒得分辨。为区分二者，抽象态度题的"容忍"极都要求你"已经掂量过／想清楚过"；另有具体分歧情境，检验你面对<b>能够权衡</b>的分歧时是否真的去权衡。抽象上容忍、具体上仍深究＝考察后的多元；抽象上容忍、具体上也回避＝脱离式容忍。二者在抽象表态上同形，只在"是否做分辨的功夫"上分开。</p>
+        <p><b>σ（离散度）</b>：同一主语下作答的摇摆，只显示不解释。<b>失效边界</b>：δ 依赖情境切身、未被识破、信息对称；ε 依赖你没有谎称"掂量过"。任一不成立，相应诊断应削弱、退回"只描述"。非常模验证的心理测验，仅供自我反思。</p>
       </div>
     </details>
   </div>
 </div>
 
 <script>
-// axis: V=确定性/边界, H=责任定位.  pos = 正极文本(V+=追求确定/清晰边界; H+=个体责任)
 const SRC = [
-  {axis:'V', pos:'面对没有定论的问题，我会一直追到那个能站得住的答案。',
-             neg:'面对没有定论的问题，我更愿意让几种解释并存，不急着收口。'},
-  {axis:'V', pos:'一个说法要么成立要么不成立，"既是又不是"多半是还没想透。',
-             neg:'很多事本就"既是又不是"，硬要判定成立与否反而失真。'},
-  {axis:'V', pos:'剥开处境与关系，"我是谁"仍有一个稳定的内核。',
-             neg:'"我是谁"是随处境与关系长出来的，并没有固定的内核。'},
-  {axis:'V', pos:'我倾向于相信，事情深究下去，终究有真假对错。',
-             neg:'我倾向于相信，很多事的真假对错，取决于从哪个框架去看。'},
-  {axis:'V', pos:'好的理解，是把模糊的东西弄得清晰、可界定。',
-             neg:'好的理解，是容得下那些无法被彻底界定的东西。'},
-  {axis:'H', pos:'一个人今天的处境，归根到底是自己一路选择的结果。',
-             neg:'一个人今天的处境，很大程度是环境、时代与关系共同塑成的。'},
-  {axis:'H', pos:'事情搞砸时，我第一反应是先看自己哪里没做好。',
-             neg:'事情搞砸时，我会先看是什么处境把人推到了这一步。'},
-  {axis:'H', pos:'"谁该负责"通常能落到一个明确的、具体的人身上。',
-             neg:'"谁该负责"常常问错了——责任是分布在整张关系网里的。'},
-  {axis:'H', pos:'改变命运，最终靠的是个人的努力与选择。',
-             neg:'改变处境，往往要靠改变所处的结构，而非仅凭个人。'},
-  {axis:'H', pos:'即便条件不利，我也更愿意扛起属于个人的那一份。',
-             neg:'把结果全算在个人头上，常常忽略了他并不掌控的那些条件。'},
+  // V 认识论 · 抽象态度（改法一：容忍极焊入"做过功"）pos=追求确定
+  {axis:'V', pos:'面对没有定论的问题，我会一直追到那个能站得住的答案。', neg:'面对没有定论的问题，我会把各种说法都掂量过，最后接受它们可能各自都部分成立。'},
+  {axis:'V', pos:'一个说法要么成立要么不成立，"既是又不是"多半是还没想透。', neg:'有些"既是又不是"是我想清楚之后仍然保留的判断，而不是没想清。'},
+  {axis:'V', pos:'剥开处境与关系，"我是谁"仍有一个稳定的内核。', neg:'我认真想过"我是谁"，结论是它确实随处境与关系变化，没有固定内核。'},
+  {axis:'V', pos:'我倾向于相信，事情深究下去终有真假对错。', neg:'我也深究过，结论是很多事的真假对错确实取决于从哪个框架看。'},
+  {axis:'V', pos:'好的理解，是把模糊的东西弄得清晰、可界定。', neg:'好的理解，是在努力界定之后，仍容得下那些界定不了的东西。'},
+
+  // Ve 认知投入 · 具体分歧情境（改法三）pos=深究权衡（+E）
+  {axis:'Ve', ctx:'两个人对同一件事给出相反的说法，各自摆出了些证据和理由。你更接近——', pos:'我会比较双方的证据，判断哪一方目前更站得住，哪怕结论只是暂时的。', neg:'各执一词的事往往没法真判对错，我一般不会去细究。'},
+  {axis:'Ve', ctx:'在一个你不熟悉的领域，专家们意见分歧。要形成自己的看法时，你更接近——', pos:'我会花力气弄懂分歧在哪、各自依据什么，再下判断。', neg:'专家都分歧的事，普通人较真也没用，我倾向于不下判断。'},
+
+  // Hprac 实践取向 pos=系统聚焦
+  {axis:'Hprac', pos:'面对我不认同的大环境，我更愿意投入去改变环境或结构本身。', neg:'面对我不认同的大环境，我先把力气用在我能控制的自身部分。'},
+  {axis:'Hprac', pos:'真正的改变来自改造人所处的系统与规则。', neg:'真正的改变来自一个个具体的人先改变自己。'},
+  {axis:'Hprac', pos:'要有所作为，就得去组织、协作、撬动结构。', neg:'要有所作为，先把自己这一个支点站稳。'},
+  {axis:'Hprac', pos:'我更看重那些针对制度与环境的行动。', neg:'我更看重那些从个人身上开始的行动。'},
+
+  // Hdesc 归因情境：自我/他人成对 pos=个体归因
+  {axis:'Hdesc', role:'self', pair:1, ctx:'你负责的一件重要的事没做成，结果对你不利。冷静下来，你更倾向于把原因归于——', pos:'我的判断或投入不够', neg:'时机、资源、他人配合等我难以左右的条件'},
+  {axis:'Hdesc', role:'other', pair:1, ctx:'一个人把一件事搞砸了，连累到你、让你受损。你更倾向于把原因归于——', pos:'他的能力或投入不够', neg:'时机、资源、配合等他难以左右的条件'},
+  {axis:'Hdesc', role:'self', pair:2, ctx:'你陷入一段事业或财务的低谷。根本上说，你更愿意理解为——', pos:'个人选择的累积', neg:'环境与结构的塑造'},
+  {axis:'Hdesc', role:'other', pair:2, ctx:'一个欠着你的人陷入低谷、一时无法兑现对你的承诺。根本上说，你更愿意理解为——', pos:'他个人选择的累积', neg:'环境与结构的塑造'},
+  {axis:'Hdesc', role:'self', pair:3, ctx:'一段关系出现严重裂痕，其中有你的责任。你更倾向于认为主要源于——', pos:'我的性格与选择', neg:'双方处境与关系模式的合力'},
+  {axis:'Hdesc', role:'other', pair:3, ctx:'有人在一段关系里伤害了你。你更倾向于认为主要源于——', pos:'他的性格与选择', neg:'双方处境与关系模式的合力'},
+
+  // Hdesc 结构强度对照 pos=个体
+  {axis:'Hdesc', role:'cstrong', ctx:'一个与你无关的人，在一场明显的系统性变故（行业崩塌、天灾）中失去了生计。主要原因在于——', pos:'他个人', neg:'外部结构'},
+  {axis:'Hdesc', role:'cweak', ctx:'一个与你无关的人，在机会与条件都相当不错的情况下把事情办砸了。主要原因在于——', pos:'他个人', neg:'外部结构'},
 ];
 
-const QUAD = {
-  tr:{name:'能动个体型',
-      desc:'世界确定可知，而"我"是边界清晰、能担责的行动者。认识论确定性给行动提供地基，个体边界给责任提供归属——四象限里最稳定的组合，也因此最容易固化成教条。',
-      note:'代表：自由主义人文主义、康德义务论、多数主流成功学叙事。'},
-  tl:{name:'结构决定论型',
-      desc:'世界依然有规律、可认知，但因果力量在结构里，不在个体。清醒，却容易滑向宿命感或"躺平"式的能动性悬空——你知道世界是什么样，却不确定自己能做什么。',
-      note:'代表：严格马克思主义、宿命论、部分严格行为主义。'},
-  bl:{name:'关系整体型',
-      desc:'自我与世界互相构成，责任分布在关系网络里而非某个个体。对个体主义视角常被误读为"不负责任"，但其实是责任被重新分布——"谁负责"这个问法本身被认为问错了。',
-      note:'代表：佛教无我、海德格尔在世存在、生态整体主义、关怀伦理。'},
-  br:{name:'存在建构型',
-      desc:'没有先验的确定与意义，责任却仍压在个体身上——你必须自己造出意义，又没有任何东西保证你造的是"对的"。四象限里唯一内部逻辑不自洽、却仍要求人活下去的角落。',
-      note:'代表：萨特"人被判定为自由"、加缪的荒谬英雄、尼采的自我超越。<b>提醒</b>：这里内在有张力，很少有人长期稳定停驻——落此常意味着你正处在一次范式转换的中途。'},
-};
+const LEFT_VAL=[2,1,-1,-2];
+const SEG=['<span class="arw">◀◀</span>A','<span class="arw">◀</span>A','B<span class="arw">▶</span>','B<span class="arw">▶▶</span>'];
 
-// node index 0..3 → 指向"左侧陈述"的强度
-const LEFT_VAL = [2, 1, -1, -2];
-const SEG_LABEL = [
-  '<span class="arw">◀◀</span>A', '<span class="arw">◀</span>A',
-  'B<span class="arw">▶</span>', 'B<span class="arw">▶▶</span>'
-];
-
-let items = [];            // rendered items (order/side randomized)
-let answers = [];          // node index per item, or null
-
+let items=[], answers=[];
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pickN(arr,n){const c=arr.slice();shuffle(c);return c.slice(0,n);}
 
 function buildItems(){
-  items = shuffle(SRC.map((s,si)=>{
-    const leftIsPos = Math.random() < 0.5;   // 随机翻转左右
-    return {
-      axis:s.axis, leftIsPos,
-      leftText:  leftIsPos ? s.pos : s.neg,
-      rightText: leftIsPos ? s.neg : s.pos,
-    };
-  }));
-  answers = new Array(items.length).fill(null);
+  const N=SRC.length; // 19
+  const withMeta=SRC.map((s,i)=>{const it={...s,src:i,leftIsPos:Math.random()<0.5};it.leftText=it.leftIsPos?it.pos:it.neg;it.rightText=it.leftIsPos?it.neg:it.pos;return it;});
+  const pairs={};
+  withMeta.forEach(it=>{ if(it.axis==='Hdesc'&&it.pair){(pairs[it.pair]=pairs[it.pair]||[]).push(it);} });
+  const early=[],late=[];
+  Object.values(pairs).forEach(arr=>{const[a,b]=arr; if(Math.random()<0.5){early.push(a);late.push(b);}else{early.push(b);late.push(a);}});
+  const fillers=withMeta.filter(it=>!(it.axis==='Hdesc'&&it.pair));
+
+  let slots=null;
+  for(let attempt=0;attempt<40;attempt++){
+    const s=new Array(N).fill(null);
+    const earlyPos=pickN([0,1,2,3,4,5],3), latePos=pickN([13,14,15,16,17,18],3);
+    shuffle(early);shuffle(late);shuffle(fillers);
+    earlyPos.forEach((p,i)=>s[p]=early[i]);
+    latePos.forEach((p,i)=>s[p]=late[i]);
+    let f=0; for(let p=0;p<N;p++){ if(!s[p]) s[p]=fillers[f++]; }
+    // 两道具体分歧题(Ve)不相邻
+    const vePos=[]; s.forEach((it,idx)=>{ if(it.axis==='Ve') vePos.push(idx); });
+    if(Math.abs(vePos[0]-vePos[1])>1){ slots=s; break; }
+    slots=s;
+  }
+  items=slots; answers=new Array(N).fill(null);
 }
 
-const formEl = document.getElementById('form');
+const formEl=document.getElementById('form');
 function render(){
   formEl.innerHTML='';
   items.forEach((it,i)=>{
-    const el=document.createElement('div');
-    el.className='item';
-    let segs='';
-    for(let n=0;n<4;n++){
-      segs+=`<div class="seg" role="radio" aria-checked="false" tabindex="0" data-i="${i}" data-n="${n}" aria-label="第${i+1}题 选择${n+1}">${SEG_LABEL[n]}</div>`;
-    }
-    el.innerHTML=`
-      <div class="item-idx">${String(i+1).padStart(2,'0')} / 10</div>
+    const el=document.createElement('div'); el.className='item';
+    let segs=''; for(let n=0;n<4;n++) segs+=`<div class="seg" role="radio" aria-checked="false" tabindex="0" data-i="${i}" data-n="${n}" aria-label="第${i+1}题 选项${n+1}">${SEG[n]}</div>`;
+    const ctx=it.ctx?`<p class="ctx">${it.ctx}</p>`:'';
+    el.innerHTML=`<div class="item-idx">${String(i+1).padStart(2,'0')} / ${items.length}</div>${ctx}
       <div class="cards">
         <div class="card" data-side="L" data-i="${i}"><span class="badge">A</span>${it.leftText}</div>
         <div class="card" data-side="R" data-i="${i}"><span class="badge">B</span>${it.rightText}</div>
@@ -327,127 +336,129 @@ function render(){
 }
 
 function pick(seg){
-  const i=+seg.dataset.i, n=+seg.dataset.n;
-  answers[i]=n;
-  document.querySelectorAll(`.seg[data-i="${i}"]`).forEach(s=>{
-    s.setAttribute('aria-checked', s===seg?'true':'false');
-  });
-  // 卡片视觉反馈：强度落在哪张卡
+  const i=+seg.dataset.i, n=+seg.dataset.n; answers[i]=n;
+  document.querySelectorAll(`.seg[data-i="${i}"]`).forEach(s=>s.setAttribute('aria-checked',s===seg?'true':'false'));
   const cards=document.querySelectorAll(`.card[data-i="${i}"]`);
   cards.forEach(c=>c.classList.remove('lean','strong'));
-  const towardLeft = n<=1;
-  const strong = (n===0||n===3);
-  const target = Array.from(cards).find(c=>c.dataset.side===(towardLeft?'L':'R'));
-  if(target) target.classList.add(strong?'strong':'lean');
+  const towardLeft=n<=1, strong=(n===0||n===3);
+  const tgt=Array.from(cards).find(c=>c.dataset.side===(towardLeft?'L':'R'));
+  if(tgt) tgt.classList.add(strong?'strong':'lean');
   update();
 }
 
-// ---- scoring ----
-const P={min:40,max:320,mid:180,span:280};
-function axisScore(axis){
-  // 返回 {sum(-10..10), signal, total} ；未答计 0
-  let sum=0, signal=0, total=0;
-  items.forEach((it,i)=>{
-    if(it.axis!==axis || answers[i]===null) return;
-    const leftVal=LEFT_VAL[answers[i]];
-    const towardPos = it.leftIsPos ? leftVal : -leftVal; // -2..2 指向正极
-    sum+=towardPos; total+=Math.abs(towardPos);
-  });
-  signal=Math.abs(sum);
-  return {sum, coh: total>0 ? signal/total : 0, total};
+function tp(it,node){ const lv=LEFT_VAL[node]; return it.leftIsPos?lv:-lv; }
+function mean(a){ return a.length? a.reduce((x,y)=>x+y,0)/a.length : 0; }
+const P={mid:180,half:140};
+const toX=n=>P.mid+n*P.half, toY=n=>P.mid-n*P.half;
+
+function compute(){
+  const rows=items.map((it,i)=>({it,a:answers[i]})).filter(o=>o.a!==null);
+  const vals=pred=>rows.filter(o=>pred(o.it)).map(o=>tp(o.it,o.a));
+  const V=rows.filter(o=>o.it.axis==='V').reduce((s,o)=>s+tp(o.it,o.a),0)/10;
+  const E=rows.filter(o=>o.it.axis==='Ve').reduce((s,o)=>s+tp(o.it,o.a),0)/4;
+  const Hprac=rows.filter(o=>o.it.axis==='Hprac').reduce((s,o)=>s+tp(o.it,o.a),0)/8;
+  const allA=vals(it=>it.axis==='Hdesc');
+  const Hdesc=allA.length?mean(allA)/2:0;
+  const selfA=vals(it=>it.role==='self'), otherA=vals(it=>it.role==='other');
+  const selfMean=mean(selfA), otherMean=mean(otherA);
+  const delta=(otherMean-selfMean)/4;
+  const madSelf=selfA.length?mean(selfA.map(x=>Math.abs(x-selfMean))):0;
+  const madOther=otherA.length?mean(otherA.map(x=>Math.abs(x-otherMean))):0;
+  const sigma=(madSelf+madOther)/2/2;
+  return {V,E,Hprac,Hdesc,selfMean:selfMean/2,otherMean:otherMean/2,delta,sigma};
 }
 
 function update(){
-  const done=answers.filter(a=>a!==null).length;
-  document.getElementById('prog').textContent=`${done} / 10`;
-
-  // during-test placeholder ring + count (the ONLY live feedback: how many left)
-  const total=items.length;
+  const done=answers.filter(a=>a!==null).length, total=items.length;
+  document.getElementById('prog').textContent=`${done} / ${total}`;
   document.getElementById('ph-count').textContent=String(done);
-  const C=2*Math.PI*52;
-  document.getElementById('ph-arc').setAttribute('stroke-dashoffset', C*(1-done/total));
-
-  const V=axisScore('V'), H=axisScore('H');
-  const xN=H.sum/10, yN=V.sum/10;
-  const cx=P.mid+xN*(P.span/2), cy=P.mid-yN*(P.span/2);
-  const pt=document.getElementById('point'), halo=document.getElementById('halo');
-  pt.setAttribute('cx',cx); pt.setAttribute('cy',cy);
-  halo.setAttribute('cx',cx); halo.setAttribute('cy',cy);
+  const C=2*Math.PI*52; document.getElementById('ph-arc').setAttribute('stroke-dashoffset',C*(1-done/total));
 
   const done10=done===total;
-  // gate the ENTIRE visualization until all items answered
-  document.getElementById('plane-wrap').style.display = done10 ? '' : 'none';
-  document.getElementById('plane-hidden').style.display = done10 ? 'none' : '';
-  document.getElementById('head-label').textContent = done10 ? '坐标平面' : '作答进度';
-  document.getElementById('labels').style.opacity=done10?'1':'0';
-  document.getElementById('readout').style.display=done10?'':'none';
+  document.getElementById('plane-wrap').style.display=done10?'':'none';
+  document.getElementById('plane-hidden').style.display=done10?'none':'';
+  document.getElementById('placeholder-wrap').style.display=done10?'none':'';
+  document.getElementById('head-label').textContent=done10?'结果':'作答进度';
+  document.getElementById('method-box').style.display=done10?'block':'none';
+  if(!done10){ document.getElementById('method-box').removeAttribute('open'); return; }
 
-  if(done10){
-    document.getElementById('rd-v').textContent=`${V.sum>=0?'+':''}${V.sum} / 10`;
-    document.getElementById('rd-h').textContent=`${H.sum>=0?'+':''}${H.sum} / 10`;
-    document.getElementById('rd-c').textContent=`( ${xN>=0?'+':''}${xN.toFixed(2)}, ${yN>=0?'+':''}${yN.toFixed(2)} )`;
-  }else{
-    document.getElementById('rd-v').textContent='— / 10';
-    document.getElementById('rd-h').textContent='— / 10';
-    document.getElementById('rd-c').textContent='( ·  ,  · )';
-  }
+  const r=compute();
+  document.getElementById('point').setAttribute('cx',toX(r.Hdesc));
+  document.getElementById('point').setAttribute('cy',toY(r.V));
+  const fog=document.getElementById('fog');
+  fog.setAttribute('cx',toX(r.Hdesc)); fog.setAttribute('cy',toY(r.V)); fog.setAttribute('r',6+r.sigma*46);
 
-  ['tl','tr','bl','br'].forEach(k=>document.getElementById('q-'+k).classList.remove('on'));
+  const pct=n=>((n+1)/2*100);
+  const put=(id,lab,n)=>{document.getElementById(id).style.left=pct(n)+'%'; if(lab)document.getElementById(lab).style.left=pct(n)+'%';};
+  put('t-self','l-self',r.selfMean); put('t-other','l-other',r.otherMean);
+  put('t-eng',null,r.E); put('t-prac',null,r.Hprac);
 
-  if(done10){
-    pt.classList.remove('unsettled'); pt.setAttribute('r','6.5'); halo.classList.add('on');
-    const key=(yN>=0?(xN>=0?'tr':'tl'):(xN>=0?'br':'bl'));
-    document.getElementById('q-'+key).classList.add('on');
-    const q=QUAD[key];
+  const fx=n=>(n>=0?'+':'')+n.toFixed(2);
+  document.getElementById('rd-v').textContent=fx(r.V);
+  document.getElementById('rd-h').textContent=fx(r.Hdesc);
+  document.getElementById('rd-d').textContent=fx(r.delta)+(r.delta>=0.25?' 利己':(r.delta<=-0.25?' 自苛':' 对称'));
+  document.getElementById('rd-e').textContent=fx(r.E)+(r.E>=0.25?' 深究':(r.E<=-0.25?' 回避':' 中性'));
+  document.getElementById('rd-s').textContent=r.sigma.toFixed(2)+(r.sigma>=0.4?' 摇摆':' 稳');
 
-    // coherence bars
-    document.getElementById('coh').style.display='';
-    setCoh('coh-v','cohv-p',V.coh);
-    setCoh('coh-h','cohh-p',H.coh);
+  const band=(n,hi,lo)=>n>0.15?hi:(n<-0.15?lo:'居中');
 
-    document.getElementById('placeholder').style.display='none';
-    const card=document.getElementById('rcard');
-    document.getElementById('r-name').textContent=q.name;
-    const border=(Math.abs(xN)<0.08||Math.abs(yN)<0.08)?'　·　临界（贴近轴线，介于两象限之间）':'';
-    document.getElementById('r-mini').textContent=`坐标 ( ${xN>=0?'+':''}${xN.toFixed(2)}, ${yN>=0?'+':''}${yN.toFixed(2)} )${border}`;
-    document.getElementById('r-desc').textContent=q.desc;
-    document.getElementById('r-note').innerHTML=q.note;
+  // ============ 最终分类 ============
+  // 基础类型：V×H 象限
+  const up=r.V>=0, right=r.Hdesc>=0;
+  let type, essence;
+  if(up&&right){ type='能动个体型'; essence='世界确定可知，"我"是边界清晰、能担责的行动者。四种里最稳定，也最容易固化成教条。'; }
+  else if(up&&!right){ type='结构决定论型'; essence='世界有规律、可认知，但因果力量在结构而非个体。清醒，却容易滑向宿命或能动性的悬空。'; }
+  else if(!up&&right){ type='存在建构型'; essence='没有先验的确定与意义，责任却仍压在个体身上——你得自己造意义。内在有张力，常是一种过渡态。'; }
+  else { type='关系整体型'; essence='自我与世界互相构成，责任分布在关系网络里——不是取消责任，而是把它重新分布。'; }
+  const borderline = (Math.abs(r.V)<0.15?'认识论':'') + (Math.abs(r.Hdesc)<0.15?(Math.abs(r.V)<0.15?'与归因':'归因'):'');
+  document.getElementById('vd-type').textContent = type;
+  document.getElementById('vd-essence').textContent = essence + (borderline?`（你在${borderline}轴上贴近中线，介于相邻类型之间，此归属较松。）`:'');
 
-    // low-consistency flag
-    const flag=document.getElementById('r-flag');
-    const low=[];
-    if(V.coh<0.4) low.push('确定性轴');
-    if(H.coh<0.4) low.push('责任轴');
-    if(low.length){
-      flag.style.display='';
-      flag.textContent=`注意：${low.join('、')}上你的作答方向反复摇摆，一致度偏低——这条轴的落点稳定性不足，可能你正卡在两极之间，也可能这几句没问到点上。此坐标仅供参考。`;
-    }else{flag.style.display='none';}
+  // ε 校验（配 V 轴）
+  const tolerant=r.V<=-0.15, certainty=r.V>=0.15;
+  let eTag,eCls,eNote;
+  if(tolerant && r.E>=0.25){ eTag='考察后的多元 · 扎实'; eCls='engp'; eNote='抽象上容忍模糊，面对具体分歧仍愿深究——是考察后的立场，而非惰性。'; }
+  else if(tolerant && r.E<=-0.25){ eTag='脱离式容忍 · 存疑'; eCls='diseng'; eNote='抽象上容忍，具体分歧前却回避权衡——"容忍模糊"可能部分是脱离而非立场。（仍是自陈，也可能只是此刻不愿细究。）'; }
+  else if(certainty && r.E<=-0.25){ eTag='张力'; eCls='incoh'; eNote='追求确定，却在具体分歧前不愿权衡——想要确定的答案，却不愿承担得出它所需的功夫。'; }
+  else if(certainty){ eTag='一致'; eCls='coh'; eNote='追求确定，也愿意去权衡具体分歧。'; }
+  else { eTag='中性'; eCls='neu'; eNote = r.E>=0.25?'认识论居中；面对具体分歧较愿深究。':(r.E<=-0.25?'认识论居中；面对具体分歧偏回避。':'认识论与认知投入都在中线附近。'); }
+  document.getElementById('chk-e-tag').textContent=eTag;
+  document.getElementById('chk-e-tag').className='chk-tag '+eCls;
+  document.getElementById('chk-e-note').textContent=eNote;
 
-    requestAnimationFrame(()=>card.classList.add('on'));
-    document.getElementById('method-box').style.display='block';
-  }else{
-    pt.classList.add('unsettled'); pt.setAttribute('r','5.5'); halo.classList.remove('on');
-    document.getElementById('coh').style.display='none';
-    document.getElementById('rcard').classList.remove('on');
-    document.getElementById('placeholder').style.display='';
-    const mb=document.getElementById('method-box');
-    mb.style.display='none'; mb.removeAttribute('open');
-  }
+  // δ 校验（配 H 轴）
+  const struct=r.Hdesc<=-0.15, indiv=r.Hdesc>=0.15;
+  let dTag,dCls,dNote;
+  if(struct && r.delta>=0.25){ dTag='利己卸责 · 存疑'; dCls='ego'; dNote='只在损及自己时才启用结构归因，对他人则归个体——这个"结构"立场可能部分是卸责，而非一贯世界观。'; }
+  else if(indiv && r.delta<=-0.25){ dTag='自苛 · 留意'; dCls='self'; dNote='对自己的失败比对他人更严苛——偏自责，不是利己防御，但值得留意是否对自己过苛。'; }
+  else if(r.delta>=0.25){ dTag='对人更苛'; dCls='self'; dNote='对他人失败的归因比对自己更偏向个人。'; }
+  else if(r.delta<=-0.25){ dTag='自苛'; dCls='self'; dNote='对自己失败的归因比对他人更严苛。'; }
+  else { dTag='融贯 · 扎实'; dCls='coh'; dNote='换成自己与换成他人时归因基本一致——是融贯的归因立场（稳定程度见下方离散度）。'; }
+  document.getElementById('chk-d-tag').textContent=dTag;
+  document.getElementById('chk-d-tag').className='chk-tag '+dCls;
+  document.getElementById('chk-d-note').textContent=dNote;
+
+  // 总判定
+  const doubt = (eCls==='diseng'||eCls==='incoh'||dCls==='ego');
+  const vd=document.getElementById('vd-verdict');
+  vd.textContent = doubt?'部分存疑':'立场扎实';
+  vd.className = 'vd-verdict '+(doubt?'doubt':'solid');
+
+  // 失效边界（仅在 ego 时展开）
+  const fail=document.getElementById('r-fail');
+  if(dCls==='ego'){ fail.style.display=''; fail.innerHTML=`δ 的三条失效边界，任一成立就应削弱"利己卸责"这一判定：① 我判定的"对你不利"未必是你主观感受到的；② 若你已看出情境是成对的，结果不可信；③ 对自己的处境你通常掌握更多内部信息，"对己宽"也可能是信息充分而非防御。`; }
+  else{ fail.style.display='none'; }
+
+  // 附加维度：实践取向（独立）+ σ（只展示不归因）
+  document.getElementById('ex-prac').textContent=`实践取向：${band(r.Hprac,'偏系统聚焦','偏自我聚焦')}　—　与上面的类型相互独立（你怎么看世界 vs 你把力气用在哪）。`;
+  document.getElementById('es-fill').style.width=Math.round(r.sigma*100)+'%';
+  document.getElementById('es-label').textContent=`作答离散度 σ = ${r.sigma.toFixed(2)}`;
+  document.getElementById('es-foot').textContent = r.sigma>=0.4
+    ? '你的作答在同类情境间波动较大。这可能是尚未理清、正在转变，或本就认为情境应区别对待——工具不替你归因，仅如实显示。'
+    : '你的作答在同类情境间较稳定。此项仅供参考，不参与上面的类型判定。';
 }
 
-function setCoh(fillId,pctId,coh){
-  const pct=Math.round(coh*100);
-  const f=document.getElementById(fillId);
-  f.style.width=pct+'%';
-  f.style.background = coh<0.4 ? 'var(--warn)' : (coh<0.7 ? '#B9993F' : 'var(--good)');
-  document.getElementById(pctId).textContent=pct+'%';
-}
-
-document.getElementById('reset').addEventListener('click',()=>{
-  buildItems(); render(); update();
-  window.scrollTo({top:0,behavior:'smooth'});
-});
-
+document.getElementById('reset').addEventListener('click',()=>{ buildItems(); render(); update(); window.scrollTo({top:0,behavior:'smooth'}); });
 buildItems(); render(); update();
 </script>
 </body>
