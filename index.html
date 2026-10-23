@@ -27,6 +27,9 @@
 
   header{border-bottom:1px solid var(--rule);padding-bottom:26px;margin-bottom:34px;}
   .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--text-faint);margin:0 0 14px;}
+  .head-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:14px;}
+  .head-top .eyebrow{margin:0;}
+  .lang-btn{padding:6px 14px;font-size:11.5px;}
   h1{font-family:"Noto Serif SC",serif;font-weight:600;font-size:clamp(28px,5vw,44px);line-height:1.12;margin:0;letter-spacing:.01em;}
   .sub{margin:16px 0 0;max-width:64ch;color:var(--text-dim);font-weight:300;font-size:15px;}
 
@@ -156,9 +159,12 @@
 <body>
 <div class="wrap">
   <header>
-    <p class="eyebrow">Worldview</p>
-    <h1>世界观定位仪</h1>
-    <p class="sub">下面有一些陈述与情境。有的给你两句话，选更贴近你的一边并标出程度；有的给你一个情境，选你更倾向的做法。没有"中立"档，凭第一反应即可。全部完成后显示结果。</p>
+    <div class="head-top">
+      <p class="eyebrow">Worldview</p>
+      <button class="btn lang-btn" id="lang-toggle" type="button">EN</button>
+    </div>
+    <h1 data-i18n="title">世界观定位仪</h1>
+    <p class="sub" data-i18n="sub">下面有一些陈述与情境。有的给你两句话，选更贴近你的一边并标出程度；有的给你一个情境，选你更倾向的做法。没有"中立"档，凭第一反应即可。全部完成后显示结果。</p>
   </header>
 
   <div class="grid">
@@ -173,12 +179,12 @@
 
         <div class="plane-hidden" id="plane-hidden">
           <div class="ph-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(233,231,223,.1)" stroke-width="4"/><circle id="ph-arc" cx="60" cy="60" r="52" fill="none" stroke="var(--brass)" stroke-width="4" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .5s ease"/></svg><span class="ph-count" id="ph-count">0</span></div>
-          <p class="ph-text">全部答完后，此处一次性显示你的结果。作答期间不提供任何中间反馈——这是为了不让你据此调整后面的选择。</p>
+          <p class="ph-text" data-i18n="phText">全部答完后，此处一次性显示你的结果。作答期间不提供任何中间反馈——这是为了不让你据此调整后面的选择。</p>
         </div>
 
         <div class="plane-wrap" id="plane-wrap" style="display:none">
           <div class="plane-box">
-            <svg viewBox="0 0 360 360" role="img" aria-label="世界观坐标平面">
+            <svg viewBox="0 0 360 360" role="img" aria-label="世界观坐标平面" data-i18n-aria="planeAria">
               <rect x="180" y="40" width="140" height="140" fill="var(--q-tr)"/>
               <rect x="40" y="40" width="140" height="140" fill="var(--q-tl)"/>
               <rect x="40" y="180" width="140" height="140" fill="var(--q-bl)"/>
@@ -186,11 +192,11 @@
               <rect x="40" y="40" width="280" height="280" fill="none" stroke="rgba(233,231,223,.14)" stroke-width="1"/>
               <line x1="180" y1="40" x2="180" y2="320" stroke="rgba(233,231,223,.22)" stroke-width="1"/>
               <line x1="40" y1="180" x2="320" y2="180" stroke="rgba(233,231,223,.22)" stroke-width="1"/>
-              <text class="axis-cap" x="180" y="30" text-anchor="middle">追求确定</text>
-              <text class="axis-cap" x="180" y="338" text-anchor="middle">容忍模糊</text>
-              <text class="axis-cap" x="34" y="183" text-anchor="end">结构</text>
-              <text class="axis-cap" x="326" y="183" text-anchor="start">个体</text>
-              <text class="qname" x="180" y="56" text-anchor="middle">认识论 × 归因（描述与实践）</text>
+              <text class="axis-cap" x="180" y="30" text-anchor="middle" data-i18n="axUp">追求确定</text>
+              <text class="axis-cap" x="180" y="338" text-anchor="middle" data-i18n="axDown">容忍模糊</text>
+              <text class="axis-cap" id="ax-left" x="34" y="183" text-anchor="end" data-i18n="axLeft">结构</text>
+              <text class="axis-cap" id="ax-right" x="326" y="183" text-anchor="start" data-i18n="axRight">个体</text>
+              <text class="qname" x="180" y="56" text-anchor="middle" data-i18n="qname">认识论 × 归因（描述与实践）</text>
               <circle class="fog" id="fog" cx="180" cy="180" r="0"/>
               <line id="prac-link" x1="180" y1="180" x2="180" y2="180" stroke="rgba(127,168,176,.55)" stroke-width="1.5" stroke-dasharray="3 3"/>
               <path id="prac-pt" d="M0,-5.5 L5.5,0 L0,5.5 L-5.5,0 Z" transform="translate(180,180)" fill="#7FA8B0" stroke="var(--ink)" stroke-width="1.5"/>
@@ -198,17 +204,17 @@
             </svg>
           </div>
           <div class="plane-legend">
-            <span class="lg"><span class="lg-dot main"></span>描述位置</span>
-            <span class="lg"><span class="lg-dot prac"></span>实践位置</span>
+            <span class="lg"><span class="lg-dot main"></span><span data-i18n="lgMain">描述位置</span></span>
+            <span class="lg"><span class="lg-dot prac"></span><span data-i18n="lgPrac">实践位置</span></span>
           </div>
 
           <div class="strips">
             <div class="strip">
-              <div class="strip-cap"><span>结构</span><span class="strip-title">归因：对自己 / 对他人</span><span>个体</span></div>
-              <div class="strip-track"><span class="tick self" id="t-self"></span><span class="tick-lab self" id="l-self">自</span><span class="tick other" id="t-other"></span><span class="tick-lab other" id="l-other">他</span></div>
+              <div class="strip-cap"><span data-i18n="axLeft">结构</span><span class="strip-title" data-i18n="stripAttr">归因：对自己 / 对他人</span><span data-i18n="axRight">个体</span></div>
+              <div class="strip-track"><span class="tick self" id="t-self"></span><span class="tick-lab self" id="l-self" data-i18n="labSelf">自</span><span class="tick other" id="t-other"></span><span class="tick-lab other" id="l-other" data-i18n="labOther">他</span></div>
             </div>
             <div class="strip">
-              <div class="strip-cap"><span>回避</span><span class="strip-title">面对具体分歧时</span><span>深究</span></div>
+              <div class="strip-cap"><span data-i18n="stripAvoid">回避</span><span class="strip-title" data-i18n="stripEng">面对具体分歧时</span><span data-i18n="stripDig">深究</span></div>
               <div class="strip-track"><span class="tick eng" id="t-eng"></span></div>
             </div>
           </div>
@@ -221,45 +227,45 @@
             <p class="vd-prac" id="vd-prac"></p>
             <p class="vd-essence" id="vd-essence"></p>
             <div class="vd-checks">
-              <div class="chk-row"><span class="chk-k">对『模糊』的态度</span><span class="chk-tag" id="chk-e-tag"></span></div>
+              <div class="chk-row"><span class="chk-k" data-i18n="chkE">对『模糊』的态度</span><span class="chk-tag" id="chk-e-tag"></span></div>
               <p class="chk-note" id="chk-e-note"></p>
-              <div class="chk-row"><span class="chk-k">对己与对人的归因</span><span class="chk-tag" id="chk-d-tag"></span></div>
+              <div class="chk-row"><span class="chk-k" data-i18n="chkD">对己与对人的归因</span><span class="chk-tag" id="chk-d-tag"></span></div>
               <p class="chk-note" id="chk-d-note"></p>
             </div>
             <p class="r-fine" id="r-fail" style="display:none"></p>
             <div class="vd-extra">
               <p class="ex-line" id="ex-decouple"></p>
               <div class="ex-sigma">
-                <div class="es-cap"><span id="es-label">作答波动</span><span class="es-note">仅供参考 · 不影响判定</span></div>
+                <div class="es-cap"><span id="es-label" data-i18n="esLabel">作答波动</span><span class="es-note" data-i18n="esNote">仅供参考 · 不影响判定</span></div>
                 <div class="es-track"><span class="es-fill" id="es-fill"></span></div>
                 <p class="es-foot" id="es-foot"></p>
               </div>
             </div>
             <details class="readout-toggle">
-              <summary>查看原始读数</summary>
+              <summary data-i18n="rawToggle">查看原始读数</summary>
               <div class="readout" id="readout">
-                <div class="line"><span>V 确定性</span><span class="v" id="rd-v">—</span></div>
-                <div class="line"><span>H 描述性归因</span><span class="v" id="rd-h">—</span></div>
-                <div class="line"><span>δ 利己性不对称</span><span class="v" id="rd-d">—</span></div>
-                <div class="line"><span>ε 认知投入</span><span class="v" id="rd-e">—</span></div>
-                <div class="line"><span>σ 离散度</span><span class="v" id="rd-s">—</span></div>
+                <div class="line"><span data-i18n="rdV">V 确定性</span><span class="v" id="rd-v">—</span></div>
+                <div class="line"><span data-i18n="rdH">H 描述性归因</span><span class="v" id="rd-h">—</span></div>
+                <div class="line"><span data-i18n="rdD">δ 利己性不对称</span><span class="v" id="rd-d">—</span></div>
+                <div class="line"><span data-i18n="rdE">ε 认知投入</span><span class="v" id="rd-e">—</span></div>
+                <div class="line"><span data-i18n="rdS">σ 离散度</span><span class="v" id="rd-s">—</span></div>
               </div>
             </details>
           </div>
         </div>
 
         <div class="result" id="placeholder-wrap">
-          <p class="placeholder">全部答完后，此处显示你的结果。</p>
+          <p class="placeholder" data-i18n="placeholder">全部答完后，此处显示你的结果。</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <button class="btn" id="reset">重测</button>
+    <button class="btn" id="reset" data-i18n="reset">重测</button>
     <details class="method-box" id="method-box">
-      <summary>关于此结果</summary>
-      <div class="method-body">
+      <summary data-i18n="methodSummary">关于此结果</summary>
+      <div class="method-body" data-i18n-html="methodBody">
         <p>这是一个用于<b>自我反思</b>的工具，不是经过验证的心理测验。它给出的类型与判定都是<b>暂时的、可讨论的</b>，不是对你的定论。</p>
         <p>结果卡里标着"存疑"的地方，意思只是"这里可能不是一个想清楚的立场，值得你自己再看看"，而非断言。它可能出错——尤其当题目里的情境对你并不切身、或你作答时更多在贴近一个"应该的自己"时。任何一条结论若与你的自我认识不符，<b>以你自己为准</b>。</p>
         <p>为了让结果不被提前的自我修饰影响，作答过程中不显示任何中间反馈；具体如何计分不在此展开。</p>
@@ -271,34 +277,211 @@
 <script>
 const SRC = [
   // V 认识论 · 抽象态度（改法一：容忍极焊入"做过功"）pos=追求确定
-  {axis:'V', pos:'面对没有定论的问题，我会一直追到那个能站得住的答案。', neg:'面对没有定论的问题，我会把各种说法都掂量过，最后接受它们可能各自都部分成立。'},
-  {axis:'V', pos:'一个说法要么成立要么不成立，"既是又不是"多半是还没想透。', neg:'有些"既是又不是"是我想清楚之后仍然保留的判断，而不是没想清。'},
-  {axis:'V', pos:'剥开处境与关系，"我是谁"仍有一个稳定的内核。', neg:'我认真想过"我是谁"，结论是它确实随处境与关系变化，没有固定内核。'},
-  {axis:'V', pos:'我倾向于相信，事情深究下去终有真假对错。', neg:'我也深究过，结论是很多事的真假对错确实取决于从哪个框架看。'},
-  {axis:'V', pos:'好的理解，是把模糊的东西弄得清晰、可界定。', neg:'好的理解，是在努力界定之后，仍容得下那些界定不了的东西。'},
+  {axis:'V', pos:'面对没有定论的问题，我会一直追到那个能站得住的答案。', neg:'面对没有定论的问题，我会把各种说法都掂量过，最后接受它们可能各自都部分成立。',
+    en:{pos:'When a question has no settled answer, I keep pursuing it until I reach an answer that holds up.', neg:'When a question has no settled answer, I weigh the various views and in the end accept that each may be partly right.'}},
+  {axis:'V', pos:'一个说法要么成立要么不成立，"既是又不是"多半是还没想透。', neg:'有些"既是又不是"是我想清楚之后仍然保留的判断，而不是没想清。',
+    en:{pos:'A claim either holds or it doesn\'t; "both yes and no" usually means it hasn\'t been thought through.', neg:'Some of my "both yes and no" judgments are ones I still hold after thinking things through, not a sign that I haven\'t.'}},
+  {axis:'V', pos:'剥开处境与关系，"我是谁"仍有一个稳定的内核。', neg:'我认真想过"我是谁"，结论是它确实随处境与关系变化，没有固定内核。',
+    en:{pos:'Strip away circumstances and relationships, and "who I am" still has a stable core.', neg:'I have thought seriously about "who I am," and concluded that it really does shift with circumstances and relationships. There is no fixed core.'}},
+  {axis:'V', pos:'我倾向于相信，事情深究下去终有真假对错。', neg:'我也深究过，结论是很多事的真假对错确实取决于从哪个框架看。',
+    en:{pos:'I tend to believe that if you dig deep enough, things ultimately turn out true or false, right or wrong.', neg:'I have dug deep too, and concluded that whether many things are true or false, right or wrong, really depends on the framework you view them from.'}},
+  {axis:'V', pos:'好的理解，是把模糊的东西弄得清晰、可界定。', neg:'好的理解，是在努力界定之后，仍容得下那些界定不了的东西。',
+    en:{pos:'Good understanding means making vague things clear and definable.', neg:'Good understanding means that, after striving to define things, you still make room for what cannot be defined.'}},
 
   // Ve 认知投入 · 具体分歧情境（改法三）pos=深究权衡（+E）
-  {axis:'Ve', ctx:'两个人对同一件事给出相反的说法，各自摆出了些证据和理由。你更接近——', pos:'我会比较双方的证据，判断哪一方目前更站得住，哪怕结论只是暂时的。', neg:'各执一词的事往往没法真判对错，我一般不会去细究。'},
-  {axis:'Ve', ctx:'在一个你不熟悉的领域，专家们意见分歧。要形成自己的看法时，你更接近——', pos:'我会花力气弄懂分歧在哪、各自依据什么，再下判断。', neg:'专家都分歧的事，普通人较真也没用，我倾向于不下判断。'},
+  {axis:'Ve', ctx:'两个人对同一件事给出相反的说法，各自摆出了些证据和理由。你更接近——', pos:'我会比较双方的证据，判断哪一方目前更站得住，哪怕结论只是暂时的。', neg:'各执一词的事往往没法真判对错，我一般不会去细究。',
+    en:{ctx:'Two people give opposite accounts of the same matter, each offering some evidence and reasons. You are closer to:', pos:'I compare the evidence on both sides and judge which one currently holds up better, even if the conclusion is only provisional.', neg:'When each side sticks to its own story, there\'s usually no real way to tell who\'s right, so I generally don\'t look into it closely.'}},
+  {axis:'Ve', ctx:'在一个你不熟悉的领域，专家们意见分歧。要形成自己的看法时，你更接近——', pos:'我会花力气弄懂分歧在哪、各自依据什么，再下判断。', neg:'专家都分歧的事，普通人较真也没用，我倾向于不下判断。',
+    en:{ctx:'In a field you are unfamiliar with, the experts disagree. When forming your own view, you are closer to:', pos:'I put in the effort to understand where the disagreement lies and what each side rests on, and then make a judgment.', neg:'If even the experts disagree, there is no point in a layperson digging in. I tend not to form a judgment.'}},
 
   // Hprac 实践取向 pos=系统聚焦
-  {axis:'Hprac', pos:'面对我不认同的大环境，我更愿意投入去改变环境或结构本身。', neg:'面对我不认同的大环境，我先把力气用在我能控制的自身部分。'},
-  {axis:'Hprac', pos:'真正的改变来自改造人所处的系统与规则。', neg:'真正的改变来自一个个具体的人先改变自己。'},
-  {axis:'Hprac', pos:'要有所作为，就得去组织、协作、撬动结构。', neg:'要有所作为，先把自己这一个支点站稳。'},
-  {axis:'Hprac', pos:'我更看重那些针对制度与环境的行动。', neg:'我更看重那些从个人身上开始的行动。'},
+  {axis:'Hprac', pos:'面对我不认同的大环境，我更愿意投入去改变环境或结构本身。', neg:'面对我不认同的大环境，我先把力气用在我能控制的自身部分。',
+    en:{pos:'Faced with a broader environment I disagree with, I would rather invest in changing the environment or its structures.', neg:'Faced with a broader environment I disagree with, I first put my effort into the parts of myself that I can control.'}},
+  {axis:'Hprac', pos:'真正的改变来自改造人所处的系统与规则。', neg:'真正的改变来自一个个具体的人先改变自己。',
+    en:{pos:'Real change comes from reshaping the systems and rules people live within.', neg:'Real change comes from individual people changing themselves first, one by one.'}},
+  {axis:'Hprac', pos:'要有所作为，就得去组织、协作、撬动结构。', neg:'要有所作为，先把自己这一个支点站稳。',
+    en:{pos:'To make a difference, you have to organize, collaborate, and move structures.', neg:'To make a difference, first make your own footing solid. That is your fulcrum.'}},
+  {axis:'Hprac', pos:'我更看重那些针对制度与环境的行动。', neg:'我更看重那些从个人身上开始的行动。',
+    en:{pos:'I value actions aimed at institutions and the environment more.', neg:'I value actions that start with the individual more.'}},
 
   // Hdesc 归因情境：自我/他人成对 pos=个体归因
-  {axis:'Hdesc', role:'self', pair:1, ctx:'你负责的一件重要的事没做成，结果对你不利。冷静下来，你更倾向于把原因归于——', pos:'我的判断或投入不够', neg:'时机、资源、他人配合等我难以左右的条件'},
-  {axis:'Hdesc', role:'other', pair:1, ctx:'一个人把一件事搞砸了，连累到你、让你受损。你更倾向于把原因归于——', pos:'他的能力或投入不够', neg:'时机、资源、配合等他难以左右的条件'},
-  {axis:'Hdesc', role:'self', pair:2, ctx:'你陷入一段事业或财务的低谷。根本上说，你更愿意理解为——', pos:'个人选择的累积', neg:'环境与结构的塑造'},
-  {axis:'Hdesc', role:'other', pair:2, ctx:'一个欠着你的人陷入低谷、一时无法兑现对你的承诺。根本上说，你更愿意理解为——', pos:'他个人选择的累积', neg:'环境与结构的塑造'},
-  {axis:'Hdesc', role:'self', pair:3, ctx:'一段关系出现严重裂痕，其中有你的责任。你更倾向于认为主要源于——', pos:'我的性格与选择', neg:'双方处境与关系模式的合力'},
-  {axis:'Hdesc', role:'other', pair:3, ctx:'有人在一段关系里伤害了你。你更倾向于认为主要源于——', pos:'他的性格与选择', neg:'双方处境与关系模式的合力'},
+  {axis:'Hdesc', role:'self', pair:1, ctx:'你负责的一件重要的事没做成，结果对你不利。冷静下来，你更倾向于把原因归于——', pos:'我的判断或投入不够', neg:'时机、资源、他人配合等我难以左右的条件',
+    en:{ctx:'Something important you were responsible for fell through, and the outcome hurt you. Once you have calmed down, you are more inclined to attribute it to:', pos:'My own judgment or effort falling short', neg:'Conditions beyond my control, such as timing, resources, or others\' cooperation'}},
+  {axis:'Hdesc', role:'other', pair:1, ctx:'一个人把一件事搞砸了，连累到你、让你受损。你更倾向于把原因归于——', pos:'他的能力或投入不够', neg:'时机、资源、配合等他难以左右的条件',
+    en:{ctx:'Someone botched something, dragging you down with them and costing you. You are more inclined to attribute it to:', pos:'Their ability or effort falling short', neg:'Conditions beyond their control, such as timing, resources, or cooperation'}},
+  {axis:'Hdesc', role:'self', pair:2, ctx:'你陷入一段事业或财务的低谷。根本上说，你更愿意理解为——', pos:'个人选择的累积', neg:'环境与结构的塑造',
+    en:{ctx:'You hit a career or financial low. Fundamentally, you would rather understand it as:', pos:'The accumulation of my personal choices', neg:'Something shaped by circumstances and structures'}},
+  {axis:'Hdesc', role:'other', pair:2, ctx:'一个欠着你的人陷入低谷、一时无法兑现对你的承诺。根本上说，你更愿意理解为——', pos:'他个人选择的累积', neg:'环境与结构的塑造',
+    en:{ctx:'Someone who owes you hits a low and, for now, cannot keep their promise to you. Fundamentally, you would rather understand it as:', pos:'The accumulation of their personal choices', neg:'Something shaped by circumstances and structures'}},
+  {axis:'Hdesc', role:'self', pair:3, ctx:'一段关系出现严重裂痕，其中有你的责任。你更倾向于认为主要源于——', pos:'我的性格与选择', neg:'双方处境与关系模式的合力',
+    en:{ctx:'A relationship develops a serious rift, and part of the responsibility is yours. You are more inclined to think it mainly stems from:', pos:'My personality and choices', neg:'The combined effect of both people\'s circumstances and the relationship\'s patterns'}},
+  {axis:'Hdesc', role:'other', pair:3, ctx:'有人在一段关系里伤害了你。你更倾向于认为主要源于——', pos:'他的性格与选择', neg:'双方处境与关系模式的合力',
+    en:{ctx:'Someone hurt you in a relationship. You are more inclined to think it mainly stems from:', pos:'Their personality and choices', neg:'The combined effect of both people\'s circumstances and the relationship\'s patterns'}},
 
   // Hdesc 结构强度对照 pos=个体
-  {axis:'Hdesc', role:'cstrong', ctx:'一个与你无关的人，在一场明显的系统性变故（行业崩塌、天灾）中失去了生计。主要原因在于——', pos:'他个人', neg:'外部结构'},
-  {axis:'Hdesc', role:'cweak', ctx:'一个与你无关的人，在机会与条件都相当不错的情况下把事情办砸了。主要原因在于——', pos:'他个人', neg:'外部结构'},
+  {axis:'Hdesc', role:'cstrong', ctx:'一个与你无关的人，在一场明显的系统性变故（行业崩塌、天灾）中失去了生计。主要原因在于——', pos:'他个人', neg:'外部结构',
+    en:{ctx:'A stranger loses their livelihood in an obviously systemic upheaval, such as an industry collapse or a natural disaster. The main cause lies in:', pos:'The person themselves', neg:'External structures'}},
+  {axis:'Hdesc', role:'cweak', ctx:'一个与你无关的人，在机会与条件都相当不错的情况下把事情办砸了。主要原因在于——', pos:'他个人', neg:'外部结构',
+    en:{ctx:'A stranger botches something despite having quite good opportunities and conditions. The main cause lies in:', pos:'The person themselves', neg:'External structures'}},
 ];
+
+const I18N={
+  zh:{
+    langBtn:'EN', htmlLang:'zh-CN',
+    title:'世界观定位仪',
+    sub:'下面有一些陈述与情境。有的给你两句话，选更贴近你的一边并标出程度；有的给你一个情境，选你更倾向的做法。没有"中立"档，凭第一反应即可。全部完成后显示结果。',
+    progress:'作答进度', result:'结果',
+    phText:'全部答完后，此处一次性显示你的结果。作答期间不提供任何中间反馈——这是为了不让你据此调整后面的选择。',
+    planeAria:'世界观坐标平面',
+    axUp:'追求确定', axDown:'容忍模糊', axLeft:'结构', axRight:'个体',
+    qname:'认识论 × 归因（描述与实践）',
+    lgMain:'描述位置', lgPrac:'实践位置',
+    stripAttr:'归因：对自己 / 对他人', labSelf:'自', labOther:'他',
+    stripAvoid:'回避', stripEng:'面对具体分歧时', stripDig:'深究',
+    chkE:'对『模糊』的态度', chkD:'对己与对人的归因',
+    esLabel:'作答波动', esNote:'仅供参考 · 不影响判定',
+    rawToggle:'查看原始读数',
+    rdV:'V 确定性', rdH:'H 描述性归因', rdD:'δ 利己性不对称', rdE:'ε 认知投入', rdS:'σ 离散度',
+    placeholder:'全部答完后，此处显示你的结果。',
+    reset:'重测', methodSummary:'关于此结果',
+    methodBody:'<p>这是一个用于<b>自我反思</b>的工具，不是经过验证的心理测验。它给出的类型与判定都是<b>暂时的、可讨论的</b>，不是对你的定论。</p>'
+      +'<p>结果卡里标着"存疑"的地方，意思只是"这里可能不是一个想清楚的立场，值得你自己再看看"，而非断言。它可能出错——尤其当题目里的情境对你并不切身、或你作答时更多在贴近一个"应该的自己"时。任何一条结论若与你的自我认识不符，<b>以你自己为准</b>。</p>'
+      +'<p>为了让结果不被提前的自我修饰影响，作答过程中不显示任何中间反馈；具体如何计分不在此展开。</p>',
+    segAria:(i,n)=>`第${i+1}题 选项${n+1}`,
+    rdDelta:{pos:' 利己', neg:' 自苛', mid:' 对称'},
+    rdEng:{pos:' 深究', neg:' 回避', mid:' 中性'},
+    rdSigma:{hi:' 摇摆', lo:' 稳'},
+    types:{
+      ai:['能动个体型','世界确定可知，"我"是边界清晰、能担责的行动者。四种里最稳定，也最容易固化成教条。'],
+      sd:['结构决定论型','世界有规律、可认知，但因果力量在结构而非个体。清醒，却容易滑向宿命或能动性的悬空。'],
+      ec:['存在建构型','没有先验的确定与意义，责任却仍压在个体身上——你得自己造意义。内在有张力，常是一种过渡态。'],
+      rh:['关系整体型','自我与世界互相构成，责任分布在关系网络里——不是取消责任，而是把它重新分布。'],
+    },
+    axisNames:{V:'认识论', H:'归因'},
+    borderline:axes=>`（你在${axes.join('与')}轴上贴近中线，介于相邻类型之间，此归属较松。）`,
+    prac:{sys:'偏系统聚焦', self:'偏自我聚焦', mid:'居中'},
+    pracLine:l=>`实践取向 · ${l}`,
+    eChk:{
+      examined:['考察后的多元 · 扎实','抽象上容忍模糊，面对具体分歧仍愿深究——是考察后的立场，而非惰性。'],
+      diseng:['脱离式容忍 · 存疑','抽象上容忍，具体分歧前却回避权衡——"容忍模糊"可能部分是脱离而非立场。（仍是自陈，也可能只是此刻不愿细究。）'],
+      tension:['张力','追求确定，却在具体分歧前不愿权衡——想要确定的答案，却不愿承担得出它所需的功夫。'],
+      consistent:['一致','追求确定，也愿意去权衡具体分歧。'],
+      neutral:'中性',
+      neuNotes:{hi:'认识论居中；面对具体分歧较愿深究。', lo:'认识论居中；面对具体分歧偏回避。', mid:'认识论与认知投入都在中线附近。'},
+    },
+    dChk:{
+      ego:['利己卸责 · 存疑','只在损及自己时才启用结构归因，对他人则归个体——这个"结构"立场可能部分是卸责，而非一贯世界观。'],
+      selfHarsh:['自苛 · 留意','对自己的失败比对他人更严苛——偏自责，不是利己防御，但值得留意是否对自己过苛。'],
+      otherHarsh:['对人更苛','对他人失败的归因比对自己更偏向个人。'],
+      selfCrit:['自苛','对自己失败的归因比对他人更严苛。'],
+      coh:['融贯 · 扎实','换成自己与换成他人时归因基本一致——是融贯的归因立场（稳定程度见下方离散度）。'],
+    },
+    verdict:{doubt:'部分存疑', solid:'立场扎实'},
+    fail:'这条判定可能不准：如果那些情境对你并不真的切身，或你作答时更多在贴近一个"应该的自己"，它就不成立。若与你的自我认识不符，以后者为准。',
+    decouple:{
+      diverge:'你"如何看世界"与"把力气用在哪"落在相反方向（平面上两个点分处两侧）。这是一种融贯的组合，而非矛盾——例如认知上承认结构塑造一切，实践上仍聚焦于自己能改变的部分。它已作为类型的一部分纳入，不计为存疑。',
+      align:'实践取向已与你对世界的看法一并纳入类型。二者本可各行其是，平面上两点越近表示越一致。',
+    },
+    esFoot:{
+      hi:'你的作答在相近的问题间波动较大。这可能是尚未想清、正在转变，或你本就认为不同情况该区别对待——不替你判断，仅如实显示。',
+      lo:'你的作答在相近的问题间比较稳定。仅供参考，不影响上面的结论。',
+    },
+  },
+  en:{
+    langBtn:'中文', htmlLang:'en',
+    title:'Worldview Locator',
+    sub:'Below are a set of statements and scenarios. Some give you two statements: pick the side closer to you and mark how strongly. Others give you a scenario: pick the response you lean toward. There is no "neutral" option, so go with your first reaction. Your result appears once everything is answered.',
+    progress:'Progress', result:'Result',
+    phText:'Once you have answered everything, your result appears here all at once. No interim feedback is shown while you answer, so that it cannot shape your later choices.',
+    planeAria:'Worldview coordinate plane',
+    axUp:'Seeks certainty', axDown:'Tolerates ambiguity', axLeft:'Structure', axRight:'Individual',
+    qname:'Epistemics × Attribution (view & practice)',
+    lgMain:'Descriptive position', lgPrac:'Practical position',
+    stripAttr:'Attribution: self / others', labSelf:'Self', labOther:'Other',
+    stripAvoid:'Avoid', stripEng:'Facing concrete disagreements', stripDig:'Dig in',
+    chkE:'Attitude toward ambiguity', chkD:'Attribution: self vs. others',
+    esLabel:'Response variability', esNote:'For reference only · does not affect the verdict',
+    rawToggle:'View raw readings',
+    rdV:'V Certainty', rdH:'H Descriptive attribution', rdD:'δ Self-serving asymmetry', rdE:'ε Cognitive engagement', rdS:'σ Dispersion',
+    placeholder:'Your result will appear here once everything is answered.',
+    reset:'Retake', methodSummary:'About this result',
+    methodBody:'<p>This is a tool for <b>self-reflection</b>, not a validated psychological test. The types and verdicts it gives are <b>provisional and open to discussion</b>, not a final word on who you are.</p>'
+      +'<p>Where the result card says "questionable," it only means "this may not be a fully thought-through stance and is worth a second look," not a firm claim. It can be wrong, especially when the scenarios do not feel personal to you, or when you answered more as the "self you think you should be." If any conclusion conflicts with how you know yourself, <b>trust yourself</b>.</p>'
+      +'<p>To keep the result from being shaped by early self-presentation, no interim feedback is shown while you answer. The scoring details are not covered here.</p>',
+    segAria:(i,n)=>`Item ${i+1}, option ${n+1}`,
+    rdDelta:{pos:' self-serving', neg:' self-critical', mid:' symmetric'},
+    rdEng:{pos:' engaged', neg:' avoidant', mid:' neutral'},
+    rdSigma:{hi:' wavering', lo:' stable'},
+    types:{
+      ai:['Agentic Individualist','The world is certain and knowable, and the "I" is a well-bounded agent who can bear responsibility. The most stable of the four types, and also the most prone to hardening into dogma.'],
+      sd:['Structural Determinist','The world has regularities and can be known, but causal force lies in structures rather than individuals. Clear-eyed, yet prone to sliding into fatalism or leaving agency suspended in midair.'],
+      ec:['Existential Constructivist','There is no given certainty or meaning, yet responsibility still rests on the individual: you have to make meaning yourself. Internally tense, and often a transitional state.'],
+      rh:['Relational Holist','Self and world constitute each other, and responsibility is spread across a web of relationships. Responsibility is not abolished but redistributed.'],
+    },
+    axisNames:{V:'epistemic', H:'attribution'},
+    borderline:axes=>` (You sit near the midline on the ${axes.join(' and ')} ${axes.length>1?'axes':'axis'}, between adjacent types, so this classification is loose.)`,
+    prac:{sys:'leans system-focused', self:'leans self-focused', mid:'balanced'},
+    pracLine:l=>`Practical orientation · ${l}`,
+    eChk:{
+      examined:['Examined pluralism · Solid','You tolerate ambiguity in the abstract, yet are still willing to dig into concrete disagreements. This is an examined stance, not inertia.'],
+      diseng:['Disengaged tolerance · Questionable','You are tolerant in the abstract, but avoid weighing concrete disagreements. Your "tolerance of ambiguity" may partly be disengagement rather than a stance. (This is still self-reported; it may just be reluctance to dig in right now.)'],
+      tension:['Tension','You seek certainty, yet are unwilling to weigh concrete disagreements: you want definite answers without doing the work it takes to reach them.'],
+      consistent:['Consistent','You seek certainty, and are also willing to weigh concrete disagreements.'],
+      neutral:'Neutral',
+      neuNotes:{hi:'Epistemically centered; fairly willing to dig into concrete disagreements.', lo:'Epistemically centered; tends to avoid concrete disagreements.', mid:'Both your epistemic stance and your cognitive engagement sit near the midline.'},
+    },
+    dChk:{
+      ego:['Self-serving deflection · Questionable','You invoke structural explanations only when the harm falls on you, while blaming the individual when it is someone else. This "structural" stance may partly be deflecting responsibility rather than a consistent worldview.'],
+      selfHarsh:['Self-critical · Take note','You judge your own failures more harshly than other people\'s. This leans toward self-blame rather than self-serving defense, but it is worth checking whether you are too hard on yourself.'],
+      otherHarsh:['Harsher on others','You attribute other people\'s failures to the individual more than you do your own.'],
+      selfCrit:['Self-critical','You attribute your own failures more harshly than other people\'s.'],
+      coh:['Coherent · Solid','Your attributions stay roughly the same whether it is you or someone else. This is a coherent attributional stance (see dispersion below for how stable it is).'],
+    },
+    verdict:{doubt:'Partly questionable', solid:'Solid stance'},
+    fail:'This verdict may be inaccurate: if those scenarios do not really feel personal to you, or if you answered more as the "self you think you should be," it does not hold. If it conflicts with how you know yourself, trust the latter.',
+    decouple:{
+      diverge:'How you "see the world" and "where you put your effort" point in opposite directions (the two markers on the plane sit on opposite sides). This is a coherent combination, not a contradiction: for example, recognizing that structures shape everything while still focusing in practice on what you yourself can change. It is incorporated into your type and is not counted as questionable.',
+      align:'Your practical orientation is incorporated into your type alongside how you see the world. The two can diverge freely; the closer the two markers on the plane, the more aligned they are.',
+    },
+    esFoot:{
+      hi:'Your answers fluctuate considerably across similar questions. You may not have settled the matter yet, you may be in transition, or you may genuinely think different cases deserve different treatment. No judgment is made here; this is simply shown as it is.',
+      lo:'Your answers are fairly stable across similar questions. For reference only; it does not affect the conclusions above.',
+    },
+  },
+};
+
+const LANG_KEY='worldview-lang';
+let lang=(()=>{
+  const saved=localStorage.getItem(LANG_KEY);
+  if(saved&&I18N[saved]) return saved;
+  return /^zh/i.test(navigator.language||'')?'zh':'en';
+})();
+const T=()=>I18N[lang];
+const tx=it=>lang==='en'?it.en:it;
+
+const AXIS_SIDE={
+  zh:{left:{x:34,y:183,anchor:'end',rot:null}, right:{x:326,y:183,anchor:'start',rot:null}},
+  en:{left:{x:26,y:180,anchor:'middle',rot:-90}, right:{x:334,y:180,anchor:'middle',rot:90}},
+};
+function applyStatic(){
+  const t=T();
+  document.documentElement.lang=t.htmlLang;
+  document.title=t.title;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t[el.dataset.i18n];});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=t[el.dataset.i18nHtml];});
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',t[el.dataset.i18nAria]);});
+  document.getElementById('lang-toggle').textContent=t.langBtn;
+  const side=AXIS_SIDE[lang];
+  [['ax-left',side.left],['ax-right',side.right]].forEach(([id,s])=>{
+    const el=document.getElementById(id);
+    el.setAttribute('x',s.x); el.setAttribute('y',s.y); el.setAttribute('text-anchor',s.anchor);
+    if(s.rot===null) el.removeAttribute('transform'); else el.setAttribute('transform',`rotate(${s.rot} ${s.x} ${s.y})`);
+  });
+}
+function setLang(l){
+  lang=l; localStorage.setItem(LANG_KEY,l);
+  applyStatic(); render(); update();
+}
 
 const LEFT_VAL=[2,1,-1,-2];
 const SEG=['<span class="arw">◀◀</span>A','<span class="arw">◀</span>A','B<span class="arw">▶</span>','B<span class="arw">▶▶</span>'];
@@ -309,7 +492,7 @@ function pickN(arr,n){const c=arr.slice();shuffle(c);return c.slice(0,n);}
 
 function buildItems(){
   const N=SRC.length; // 19
-  const withMeta=SRC.map((s,i)=>{const it={...s,src:i,leftIsPos:Math.random()<0.5};it.leftText=it.leftIsPos?it.pos:it.neg;it.rightText=it.leftIsPos?it.neg:it.pos;return it;});
+  const withMeta=SRC.map((s,i)=>({...s,src:i,leftIsPos:Math.random()<0.5}));
   const pairs={};
   withMeta.forEach(it=>{ if(it.axis==='Hdesc'&&it.pair){(pairs[it.pair]=pairs[it.pair]||[]).push(it);} });
   const early=[],late=[];
@@ -337,12 +520,13 @@ function render(){
   formEl.innerHTML='';
   items.forEach((it,i)=>{
     const el=document.createElement('div'); el.className='item';
-    let segs=''; for(let n=0;n<4;n++) segs+=`<div class="seg" role="radio" aria-checked="false" tabindex="0" data-i="${i}" data-n="${n}" aria-label="第${i+1}题 选项${n+1}">${SEG[n]}</div>`;
-    const ctx=it.ctx?`<p class="ctx">${it.ctx}</p>`:'';
+    const t=tx(it);
+    let segs=''; for(let n=0;n<4;n++) segs+=`<div class="seg" role="radio" aria-checked="false" tabindex="0" data-i="${i}" data-n="${n}" aria-label="${T().segAria(i,n)}">${SEG[n]}</div>`;
+    const ctx=t.ctx?`<p class="ctx">${t.ctx}</p>`:'';
     el.innerHTML=`<div class="item-idx">${String(i+1).padStart(2,'0')} / ${items.length}</div>${ctx}
       <div class="cards">
-        <div class="card" data-side="L" data-i="${i}"><span class="badge">A</span>${it.leftText}</div>
-        <div class="card" data-side="R" data-i="${i}"><span class="badge">B</span>${it.rightText}</div>
+        <div class="card" data-side="L" data-i="${i}"><span class="badge">A</span>${it.leftIsPos?t.pos:t.neg}</div>
+        <div class="card" data-side="R" data-i="${i}"><span class="badge">B</span>${it.leftIsPos?t.neg:t.pos}</div>
       </div>
       <div class="balance"><div class="seg-row">${segs}</div></div>`;
     formEl.appendChild(el);
@@ -351,16 +535,21 @@ function render(){
     s.addEventListener('click',()=>pick(s));
     s.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();pick(s);}});
   });
+  answers.forEach((n,i)=>{ if(n!==null) mark(i,n); });
 }
 
-function pick(seg){
-  const i=+seg.dataset.i, n=+seg.dataset.n; answers[i]=n;
-  document.querySelectorAll(`.seg[data-i="${i}"]`).forEach(s=>s.setAttribute('aria-checked',s===seg?'true':'false'));
+function mark(i,n){
+  document.querySelectorAll(`.seg[data-i="${i}"]`).forEach(s=>s.setAttribute('aria-checked',+s.dataset.n===n?'true':'false'));
   const cards=document.querySelectorAll(`.card[data-i="${i}"]`);
   cards.forEach(c=>c.classList.remove('lean','strong'));
   const towardLeft=n<=1, strong=(n===0||n===3);
   const tgt=Array.from(cards).find(c=>c.dataset.side===(towardLeft?'L':'R'));
   if(tgt) tgt.classList.add(strong?'strong':'lean');
+}
+
+function pick(seg){
+  const i=+seg.dataset.i, n=+seg.dataset.n; answers[i]=n;
+  mark(i,n);
   update();
 }
 
@@ -396,7 +585,8 @@ function update(){
   document.getElementById('plane-wrap').style.display=done10?'':'none';
   document.getElementById('plane-hidden').style.display=done10?'none':'';
   document.getElementById('placeholder-wrap').style.display=done10?'none':'';
-  document.getElementById('head-label').textContent=done10?'结果':'作答进度';
+  const t=T();
+  document.getElementById('head-label').textContent=done10?t.result:t.progress;
   document.getElementById('method-box').style.display=done10?'block':'none';
   if(!done10){ document.getElementById('method-box').removeAttribute('open'); return; }
 
@@ -417,39 +607,34 @@ function update(){
   const link=document.getElementById('prac-link');
   link.setAttribute('x1',mx); link.setAttribute('y1',my); link.setAttribute('x2',px); link.setAttribute('y2',py);
 
-  const band=(n,hi,lo)=>n>0.15?hi:(n<-0.15?lo:'居中');
-
   const fx=n=>(n>=0?'+':'')+n.toFixed(2);
   document.getElementById('rd-v').textContent=fx(r.V);
   document.getElementById('rd-h').textContent=fx(r.Hdesc);
-  document.getElementById('rd-d').textContent=fx(r.delta)+(r.delta>=0.25?' 利己':(r.delta<=-0.25?' 自苛':' 对称'));
-  document.getElementById('rd-e').textContent=fx(r.E)+(r.E>=0.25?' 深究':(r.E<=-0.25?' 回避':' 中性'));
-  document.getElementById('rd-s').textContent=r.sigma.toFixed(2)+(r.sigma>=0.4?' 摇摆':' 稳');
+  document.getElementById('rd-d').textContent=fx(r.delta)+(r.delta>=0.25?t.rdDelta.pos:(r.delta<=-0.25?t.rdDelta.neg:t.rdDelta.mid));
+  document.getElementById('rd-e').textContent=fx(r.E)+(r.E>=0.25?t.rdEng.pos:(r.E<=-0.25?t.rdEng.neg:t.rdEng.mid));
+  document.getElementById('rd-s').textContent=r.sigma.toFixed(2)+(r.sigma>=0.4?t.rdSigma.hi:t.rdSigma.lo);
 
   // ============ 最终分类 ============
   // 基础类型：V×H 象限
   const up=r.V>=0, right=r.Hdesc>=0;
-  let type, essence;
-  if(up&&right){ type='能动个体型'; essence='世界确定可知，"我"是边界清晰、能担责的行动者。四种里最稳定，也最容易固化成教条。'; }
-  else if(up&&!right){ type='结构决定论型'; essence='世界有规律、可认知，但因果力量在结构而非个体。清醒，却容易滑向宿命或能动性的悬空。'; }
-  else if(!up&&right){ type='存在建构型'; essence='没有先验的确定与意义，责任却仍压在个体身上——你得自己造意义。内在有张力，常是一种过渡态。'; }
-  else { type='关系整体型'; essence='自我与世界互相构成，责任分布在关系网络里——不是取消责任，而是把它重新分布。'; }
-  const borderline = (Math.abs(r.V)<0.15?'认识论':'') + (Math.abs(r.Hdesc)<0.15?(Math.abs(r.V)<0.15?'与归因':'归因'):'');
+  const typeKey = up&&right?'ai':(up?'sd':(right?'ec':'rh'));
+  const [type, essence] = t.types[typeKey];
+  const nearAxes=[]; if(Math.abs(r.V)<0.15) nearAxes.push(t.axisNames.V); if(Math.abs(r.Hdesc)<0.15) nearAxes.push(t.axisNames.H);
   document.getElementById('vd-type').textContent = type;
-  document.getElementById('vd-essence').textContent = essence + (borderline?`（你在${borderline}轴上贴近中线，介于相邻类型之间，此归属较松。）`:'');
+  document.getElementById('vd-essence').textContent = essence + (nearAxes.length?t.borderline(nearAxes):'');
 
   // 实践取向作为类型的第二个组成部分（不预设与描述一致）
-  const pracLabel = r.Hprac>0.15?'偏系统聚焦':(r.Hprac<-0.15?'偏自我聚焦':'居中');
-  document.getElementById('vd-prac').textContent = `实践取向 · ${pracLabel}`;
+  const pracLabel = r.Hprac>0.15?t.prac.sys:(r.Hprac<-0.15?t.prac.self:t.prac.mid);
+  document.getElementById('vd-prac').textContent = t.pracLine(pracLabel);
 
   // ε 校验（配 V 轴）
   const tolerant=r.V<=-0.15, certainty=r.V>=0.15;
   let eTag,eCls,eNote;
-  if(tolerant && r.E>=0.25){ eTag='考察后的多元 · 扎实'; eCls='engp'; eNote='抽象上容忍模糊，面对具体分歧仍愿深究——是考察后的立场，而非惰性。'; }
-  else if(tolerant && r.E<=-0.25){ eTag='脱离式容忍 · 存疑'; eCls='diseng'; eNote='抽象上容忍，具体分歧前却回避权衡——"容忍模糊"可能部分是脱离而非立场。（仍是自陈，也可能只是此刻不愿细究。）'; }
-  else if(certainty && r.E<=-0.25){ eTag='张力'; eCls='incoh'; eNote='追求确定，却在具体分歧前不愿权衡——想要确定的答案，却不愿承担得出它所需的功夫。'; }
-  else if(certainty){ eTag='一致'; eCls='coh'; eNote='追求确定，也愿意去权衡具体分歧。'; }
-  else { eTag='中性'; eCls='neu'; eNote = r.E>=0.25?'认识论居中；面对具体分歧较愿深究。':(r.E<=-0.25?'认识论居中；面对具体分歧偏回避。':'认识论与认知投入都在中线附近。'); }
+  if(tolerant && r.E>=0.25){ [eTag,eNote]=t.eChk.examined; eCls='engp'; }
+  else if(tolerant && r.E<=-0.25){ [eTag,eNote]=t.eChk.diseng; eCls='diseng'; }
+  else if(certainty && r.E<=-0.25){ [eTag,eNote]=t.eChk.tension; eCls='incoh'; }
+  else if(certainty){ [eTag,eNote]=t.eChk.consistent; eCls='coh'; }
+  else { eTag=t.eChk.neutral; eCls='neu'; eNote = r.E>=0.25?t.eChk.neuNotes.hi:(r.E<=-0.25?t.eChk.neuNotes.lo:t.eChk.neuNotes.mid); }
   document.getElementById('chk-e-tag').textContent=eTag;
   document.getElementById('chk-e-tag').className='chk-tag '+eCls;
   document.getElementById('chk-e-note').textContent=eNote;
@@ -457,11 +642,11 @@ function update(){
   // δ 校验（配 H 轴）
   const struct=r.Hdesc<=-0.15, indiv=r.Hdesc>=0.15;
   let dTag,dCls,dNote;
-  if(struct && r.delta>=0.25){ dTag='利己卸责 · 存疑'; dCls='ego'; dNote='只在损及自己时才启用结构归因，对他人则归个体——这个"结构"立场可能部分是卸责，而非一贯世界观。'; }
-  else if(indiv && r.delta<=-0.25){ dTag='自苛 · 留意'; dCls='self'; dNote='对自己的失败比对他人更严苛——偏自责，不是利己防御，但值得留意是否对自己过苛。'; }
-  else if(r.delta>=0.25){ dTag='对人更苛'; dCls='self'; dNote='对他人失败的归因比对自己更偏向个人。'; }
-  else if(r.delta<=-0.25){ dTag='自苛'; dCls='self'; dNote='对自己失败的归因比对他人更严苛。'; }
-  else { dTag='融贯 · 扎实'; dCls='coh'; dNote='换成自己与换成他人时归因基本一致——是融贯的归因立场（稳定程度见下方离散度）。'; }
+  if(struct && r.delta>=0.25){ [dTag,dNote]=t.dChk.ego; dCls='ego'; }
+  else if(indiv && r.delta<=-0.25){ [dTag,dNote]=t.dChk.selfHarsh; dCls='self'; }
+  else if(r.delta>=0.25){ [dTag,dNote]=t.dChk.otherHarsh; dCls='self'; }
+  else if(r.delta<=-0.25){ [dTag,dNote]=t.dChk.selfCrit; dCls='self'; }
+  else { [dTag,dNote]=t.dChk.coh; dCls='coh'; }
   document.getElementById('chk-d-tag').textContent=dTag;
   document.getElementById('chk-d-tag').className='chk-tag '+dCls;
   document.getElementById('chk-d-note').textContent=dNote;
@@ -469,27 +654,24 @@ function update(){
   // 总判定
   const doubt = (eCls==='diseng'||eCls==='incoh'||dCls==='ego');
   const vd=document.getElementById('vd-verdict');
-  vd.textContent = doubt?'部分存疑':'立场扎实';
+  vd.textContent = doubt?t.verdict.doubt:t.verdict.solid;
   vd.className = 'vd-verdict '+(doubt?'doubt':'solid');
 
   // 失效提醒（仅在 ego 时展开）——只提醒"可能不准"，不透露检测机制
   const fail=document.getElementById('r-fail');
-  if(dCls==='ego'){ fail.style.display=''; fail.innerHTML=`这条判定可能不准：如果那些情境对你并不真的切身，或你作答时更多在贴近一个"应该的自己"，它就不成立。若与你的自我认识不符，以后者为准。`; }
+  if(dCls==='ego'){ fail.style.display=''; fail.textContent=t.fail; }
   else{ fail.style.display='none'; }
 
   // 描述 vs 实践的关系：分歧时肯定其融贯（不判为异常），否则说明二者已一并纳入类型
   const dv=r.Hdesc, pv=r.Hprac, diverge=(Math.abs(dv)>=0.15 && Math.abs(pv)>=0.15 && (dv>0)!==(pv>0));
-  document.getElementById('ex-decouple').textContent = diverge
-    ? `你"如何看世界"与"把力气用在哪"落在相反方向（平面上两个点分处两侧）。这是一种融贯的组合，而非矛盾——例如认知上承认结构塑造一切，实践上仍聚焦于自己能改变的部分。它已作为类型的一部分纳入，不计为存疑。`
-    : `实践取向已与你对世界的看法一并纳入类型。二者本可各行其是，平面上两点越近表示越一致。`;
+  document.getElementById('ex-decouple').textContent = diverge ? t.decouple.diverge : t.decouple.align;
   document.getElementById('es-fill').style.width=Math.round(r.sigma*100)+'%';
-  document.getElementById('es-foot').textContent = r.sigma>=0.4
-    ? '你的作答在相近的问题间波动较大。这可能是尚未想清、正在转变，或你本就认为不同情况该区别对待——不替你判断，仅如实显示。'
-    : '你的作答在相近的问题间比较稳定。仅供参考，不影响上面的结论。';
+  document.getElementById('es-foot').textContent = r.sigma>=0.4 ? t.esFoot.hi : t.esFoot.lo;
 }
 
 document.getElementById('reset').addEventListener('click',()=>{ buildItems(); render(); update(); window.scrollTo({top:0,behavior:'smooth'}); });
-buildItems(); render(); update();
+document.getElementById('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
+buildItems(); applyStatic(); render(); update();
 </script>
 </body>
 </html>
